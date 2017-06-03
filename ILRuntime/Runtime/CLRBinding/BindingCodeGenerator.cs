@@ -273,7 +273,7 @@ namespace ILRuntime.Runtime.Generated
                     }
                     break;
                 default:");
-                sb.AppendLine(string.Format("                    instance_of_this_method = {0};", GetRetrieveValueCode(type, typeClsName)));
+                sb.AppendLine(GetRetrieveValueCode("instance_of_this_method", type, typeClsName, 0));
                 sb.AppendLine(@"                    break;
             }
             return instance_of_this_method;");
@@ -281,7 +281,7 @@ namespace ILRuntime.Runtime.Generated
             }
             if (!type.IsPrimitive && !type.IsAbstract)
             {
-                sb.AppendLine(string.Format("        static void WriteBackInstance(ILRuntime.Runtime.Enviorment.AppDomain __domain, StackObject* ptr_of_this_method, List<object> __mStack, ref {0} instance_of_this_method)", typeClsName));
+                sb.AppendLine(string.Format("        static void WriteBackInstance(ILRuntime.Runtime.Enviorment.AppDomain __domain, StackObject* ptr_of_this_method, List<object> __mStack, object instance_of_this_method)"));
                 sb.AppendLine("        {");
                 sb.AppendLine(@"            ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);
             switch(ptr_of_this_method->ObjectType)
@@ -327,7 +327,7 @@ namespace ILRuntime.Runtime.Generated
                         var instance_of_arrayReference = __mStack[ptr_of_this_method->Value] as ");
                 sb.Append(typeClsName);
                 sb.AppendLine(@"[];
-                        instance_of_arrayReference[ptr_of_this_method->ValueLow] = instance_of_this_method;
+                        instance_of_arrayReference[ptr_of_this_method->ValueLow] = (" + typeClsName + @")instance_of_this_method;
                     }
                     break;
             }");
@@ -363,7 +363,7 @@ namespace ILRuntime.Runtime.Generated
                     p.ParameterType.GetClassName(out tmp, out clsName, out isByRef);
                     if (isByRef)
                         sb.AppendLine("            ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);");
-                    sb.AppendLine(string.Format("            {0} {1} = {2};", clsName, p.Name, GetRetrieveValueCode(p.ParameterType, clsName)));
+                    sb.AppendLine(GetRetrieveValueCode(clsName + " " + p.Name, p.ParameterType, clsName, j + 1));
                     if (!isByRef && !p.ParameterType.IsPrimitive)
                         sb.AppendLine("            __intp.Free(ptr_of_this_method);");
                 }
@@ -384,7 +384,7 @@ namespace ILRuntime.Runtime.Generated
                     sb.AppendLine(@"            if(!isNewObj)
             {
                 __ret--;
-                WriteBackInstance(__domain, __ret, __mStack, ref result_of_this_method);
+                WriteBackInstance(__domain, __ret, __mStack, result_of_this_method);
                 return __ret;
             }"); 
                 }
@@ -495,7 +495,7 @@ namespace ILRuntime.Runtime.Generated
                     p.ParameterType.GetClassName(out tmp, out clsName, out isByRef);
                     if (isByRef)
                         sb.AppendLine("            ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);");
-                    sb.AppendLine(string.Format("            {0} {1} = {2};", clsName, p.Name, GetRetrieveValueCode(p.ParameterType, clsName)));
+                    sb.AppendLine(GetRetrieveValueCode(clsName + " " + p.Name, p.ParameterType, clsName, j + 1));
                     if (!isByRef && !p.ParameterType.IsPrimitive)
                         sb.AppendLine("            __intp.Free(ptr_of_this_method);");
                 }
@@ -509,7 +509,7 @@ namespace ILRuntime.Runtime.Generated
                         if (type.IsValueType)
                             sb.AppendLine("            ptr_of_this_method = ILIntepreter.GetObjectAndResolveReference(ptr_of_this_method);");
                         sb.AppendLine(string.Format("            {0} instance_of_this_method;", typeClsName));
-                        sb.AppendLine(string.Format("            instance_of_this_method = {0};", GetRetrieveValueCode(type, typeClsName)));
+                        sb.AppendLine(GetRetrieveValueCode("instance_of_this_method", type, typeClsName, 0));
                         if (!type.IsValueType)
                             sb.AppendLine("            __intp.Free(ptr_of_this_method);");
                     }
@@ -650,7 +650,7 @@ namespace ILRuntime.Runtime.Generated
 
                 if (!i.IsStatic && type.IsValueType && !type.IsPrimitive)//need to write back value type instance
                 {
-                    sb.AppendLine("            WriteBackInstance(__domain, ptr_of_this_method, __mStack, ref instance_of_this_method);");
+                    sb.AppendLine("            WriteBackInstance(__domain, ptr_of_this_method, __mStack, instance_of_this_method);");
                     sb.AppendLine();
                 }
                 //Ref/Out
@@ -933,67 +933,70 @@ namespace ILRuntime.Runtime.Generated
             }
         }
 
-        static string GetRetrieveValueCode(Type type, string realClsName)
+        static string GetRetrieveValueCode(string var, Type type, string realClsName, int idx)
         {
             if (type.IsByRef)
                 type = type.GetElementType();
+
+            string exp;
+
             if (type.IsPrimitive)
             {
                 if (type == typeof(int))
                 {
-                    return "ptr_of_this_method->Value";
+                    exp = "{0} = ptr_of_this_method->Value";
                 }
                 else if (type == typeof(long))
                 {
-                    return "*(long*)&ptr_of_this_method->Value";
+                    exp = "{0} = *(long*)&ptr_of_this_method->Value";
                 }
                 else if (type == typeof(short))
                 {
-                    return "(short)ptr_of_this_method->Value";
+                    exp = "{0} = (short)ptr_of_this_method->Value";
                 }
                 else if (type == typeof(bool))
                 {
-                    return "ptr_of_this_method->Value == 1";
+                    exp = "{0} = ptr_of_this_method->Value == 1";
                 }
                 else if (type == typeof(ushort))
                 {
-                    return "(ushort)ptr_of_this_method->Value";
+                    exp = "{0} = (ushort)ptr_of_this_method->Value";
                 }
                 else if (type == typeof(float))
                 {
-                    return "*(float*)&ptr_of_this_method->Value";
+                    exp = "{0} = *(float*)&ptr_of_this_method->Value";
                 }
                 else if (type == typeof(double))
                 {
-                    return "*(double*)&ptr_of_this_method->Value";
+                    exp = "{0} = *(double*)&ptr_of_this_method->Value";
                 }
                 else if (type == typeof(byte))
                 {
-                    return "(byte)ptr_of_this_method->Value";
+                    exp = "{0} = (byte)ptr_of_this_method->Value";
                 }
                 else if (type == typeof(sbyte))
                 {
-                    return "(sbyte)ptr_of_this_method->Value";
+                    exp = "{0} = (sbyte)ptr_of_this_method->Value";
                 }
                 else if (type == typeof(uint))
                 {
-                    return "(uint)ptr_of_this_method->Value";
+                    exp = "{0} = (uint)ptr_of_this_method->Value";
                 }
                 else if (type == typeof(char))
                 {
-                    return "(char)ptr_of_this_method->Value";
+                    exp = "{0} = (char)ptr_of_this_method->Value";
                 }
                 else if (type == typeof(ulong))
                 {
-                    return "*(ulong*)&ptr_of_this_method->Value";
+                    exp = "{0} = *(ulong*)&ptr_of_this_method->Value";
                 }
                 else
                     throw new NotImplementedException();
+
+                return string.Format("            " + exp + ";", var);
             }
-            else
-            {
-                return string.Format("({0})typeof({0}).CheckCLRTypes(StackObject.ToObject(ptr_of_this_method, __domain, __mStack))", realClsName);
-            }
+
+            return string.Format("            var o{2} = StackObject.ToObject(ptr_of_this_method, __domain, __mStack);\n            {0} = ({1})typeof({1}).CheckCLRTypes(ref o{2});", var, realClsName, idx);
         }
     }
 }

@@ -118,7 +118,7 @@ namespace ILRuntime.Runtime.Enviorment
             }
             else
             {
-                if(((Type)typeof(Type).CheckCLRTypes(instance)).Equals(((Type)typeof(Type).CheckCLRTypes(other))))
+                if(((Type)typeof(Type).CheckCLRTypes(ref instance)).Equals(((Type)typeof(Type).CheckCLRTypes(ref other))))
                     return ILIntepreter.PushOne(ret);
                 else
                     return ILIntepreter.PushZero(ret);

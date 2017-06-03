@@ -179,7 +179,8 @@ namespace ILRuntime.Reflection
                     else
                         ins = ((CrossBindingAdaptorType)obj).ILInstance;
                 }
-                return fieldType.TypeForCLR.CheckCLRTypes(ins[fieldIdx]);
+                var o = ins[fieldIdx];
+                return fieldType.TypeForCLR.CheckCLRTypes(ref o);
             }
         }
 

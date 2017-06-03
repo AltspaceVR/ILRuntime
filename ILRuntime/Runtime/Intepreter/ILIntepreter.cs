@@ -75,7 +75,10 @@ namespace ILRuntime.Runtime.Intepreter
             esp = PushParameters(method, esp, p);
             bool unhandledException;
             esp = Execute(method, esp, out unhandledException);
-            object result = method.ReturnType != domain.VoidType ? method.ReturnType.TypeForCLR.CheckCLRTypes(StackObject.ToObject((esp - 1), domain, mStack)) : null;
+            object o = null;
+            var isVoid = method.ReturnType != domain.VoidType;
+            if (!isVoid) o = StackObject.ToObject((esp - 1), domain, mStack);
+            object result =  !isVoid ? method.ReturnType.TypeForCLR.CheckCLRTypes(ref o) : null;
             //ClearStack
             mStack.RemoveRange(mStackBase, mStack.Count - mStackBase);
             return result;
@@ -517,7 +520,8 @@ namespace ILRuntime.Runtime.Intepreter
                                                 else
                                                 {
                                                     var t = AppDomain.GetType(ip->TokenInteger);
-                                                    ((CLRType)t).GetField(idx).SetValue(obj, t.TypeForCLR.CheckCLRTypes(StackObject.ToObject(val, AppDomain, mStack)));
+                                                    var o = StackObject.ToObject(val, AppDomain, mStack);
+                                                    ((CLRType)t).GetField(idx).SetValue(obj, t.TypeForCLR.CheckCLRTypes(ref o));
                                                 }
                                             }
                                             break;
@@ -530,7 +534,8 @@ namespace ILRuntime.Runtime.Intepreter
                                                 }
                                                 else
                                                 {
-                                                    ((CLRType)t).GetField(objRef->ValueLow).SetValue(null, t.TypeForCLR.CheckCLRTypes(StackObject.ToObject(val, AppDomain, mStack)));
+                                                    var o = StackObject.ToObject(val, AppDomain, mStack);
+                                                    ((CLRType)t).GetField(objRef->ValueLow).SetValue(null, t.TypeForCLR.CheckCLRTypes(ref o));
                                                 }
                                             }
                                             break;
@@ -1795,7 +1800,8 @@ namespace ILRuntime.Runtime.Intepreter
                                             {
                                                 var val = esp - 1;
                                                 var f = ((CLRType)type).GetField(ip->TokenInteger);
-                                                f.SetValue(obj, f.FieldType.CheckCLRTypes(CheckAndCloneValueType(StackObject.ToObject(val, domain, mStack), domain)));
+                                                var o = CheckAndCloneValueType(StackObject.ToObject(val, domain, mStack), domain);
+                                                f.SetValue(obj, f.FieldType.CheckCLRTypes(ref o));
                                                 //Writeback
                                                 if (t.IsValueType)
                                                 {
@@ -1924,7 +1930,8 @@ namespace ILRuntime.Runtime.Intepreter
                                             int idx = (int)ip->TokenLong;
                                             var f = t.GetField(idx);
                                             StackObject* val = esp - 1;
-                                            f.SetValue(null, f.FieldType.CheckCLRTypes(CheckAndCloneValueType(StackObject.ToObject(val, domain, mStack), domain)));
+                                            var o = CheckAndCloneValueType(StackObject.ToObject(val, domain, mStack), domain);
+                                            f.SetValue(null, f.FieldType.CheckCLRTypes(ref o));
                                         }
                                     }
                                     else
@@ -2403,7 +2410,8 @@ namespace ILRuntime.Runtime.Intepreter
                                             }
                                             else if (tt.IsPrimitive)
                                             {
-                                                esp = PushObject(esp - 1, mStack, tt.CheckCLRTypes(StackObject.ToObject(obj, AppDomain, mStack)));
+                                                var o = StackObject.ToObject(obj, AppDomain, mStack);
+                                                esp = PushObject(esp - 1, mStack, tt.CheckCLRTypes(ref o));
                                             }
                                             else
                                             {
@@ -3761,7 +3769,7 @@ namespace ILRuntime.Runtime.Intepreter
                         Array arr = mStack[objRef->Value] as Array;
                         int idx = objRef->ValueLow;
                         obj = arr.GetValue(idx);
-                        obj = obj.GetType().CheckCLRTypes(obj);
+                        obj = obj.GetType().CheckCLRTypes(ref obj);
                     }
                     break;
                 case ObjectTypes.StaticFieldReference:
@@ -3789,7 +3797,7 @@ namespace ILRuntime.Runtime.Intepreter
             if (obj == null)
                 arr.SetValue(null, idx);
             else
-                arr.SetValue(arr.GetType().GetElementType().CheckCLRTypes(obj), idx);
+                arr.SetValue(arr.GetType().GetElementType().CheckCLRTypes(ref obj), idx);
         }
 
         void StoreIntValueToArray(Array arr, StackObject* val, StackObject* idx)
@@ -3911,7 +3919,8 @@ namespace ILRuntime.Runtime.Intepreter
             {
                 CLRType t = AppDomain.GetType(obj.GetType()) as CLRType;
                 var fi = t.GetField(idx);
-                var v = obj.GetType().CheckCLRTypes(CheckAndCloneValueType(StackObject.ToObject(val, AppDomain, mStack), AppDomain));
+                var o = CheckAndCloneValueType(StackObject.ToObject(val, AppDomain, mStack), AppDomain);
+                var v = obj.GetType().CheckCLRTypes(ref o);
                 fi.SetValue(obj, v);
             }
         }
