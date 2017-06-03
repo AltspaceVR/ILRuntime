@@ -353,7 +353,7 @@ namespace ILRuntime.Runtime.Enviorment
                 objectType = GetType("System.Object");
             }
             module.AssemblyResolver.ResolveFailure += AssemblyResolver_ResolveFailure;
-#if DEBUG
+#if ILRUNTIME_DEBUG
             debugService.NotifyModuleLoaded(module.Name);
 #endif
         }
@@ -901,7 +901,7 @@ namespace ILRuntime.Runtime.Enviorment
                     else
                     {
                         inteptreter = new ILIntepreter(this);
-#if DEBUG
+#if ILRUNTIME_DEBUG
                         intepreters[inteptreter.GetHashCode()] = inteptreter;
                         debugService.ThreadStarted(inteptreter);
 #endif
@@ -915,7 +915,7 @@ namespace ILRuntime.Runtime.Enviorment
                 {
                     lock (freeIntepreters)
                     {
-#if DEBUG
+#if ILRUNTIME_DEBUG
                         if(inteptreter.CurrentStepType!= StepTypes.None)
                         {
                             //We should resume all other threads if we are currently doing stepping operation
@@ -933,7 +933,7 @@ namespace ILRuntime.Runtime.Enviorment
                         inteptreter.Stack.ManagedStack.Clear();
                         inteptreter.Stack.Frames.Clear();
                         freeIntepreters.Enqueue(inteptreter);
-#if DEBUG
+#if ILRUNTIME_DEBUG
                         //debugService.ThreadEnded(inteptreter);
 #endif
 
