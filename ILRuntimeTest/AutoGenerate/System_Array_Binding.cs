@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 using ILRuntime.CLR.TypeSystem;
 using ILRuntime.CLR.Method;
@@ -18,200 +19,204 @@ namespace ILRuntime.Runtime.Generated
         {
             BindingFlags flag = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
             MethodBase method;
+            FieldInfo field;
             Type[] args;
             Type type = typeof(System.Array);
             args = new Type[]{typeof(System.Type), typeof(System.Int32)};
             method = type.GetMethod("CreateInstance", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, CreateInstance_0);
+            if (method != null) app.RegisterCLRMethodRedirection(method, CreateInstance_0); else UnityEngine.Debug.LogWarning("warning missing method CreateInstance"); 
             args = new Type[]{typeof(System.Type), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("CreateInstance", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, CreateInstance_1);
+            if (method != null) app.RegisterCLRMethodRedirection(method, CreateInstance_1); else UnityEngine.Debug.LogWarning("warning missing method CreateInstance"); 
             args = new Type[]{typeof(System.Type), typeof(System.Int32), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("CreateInstance", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, CreateInstance_2);
+            if (method != null) app.RegisterCLRMethodRedirection(method, CreateInstance_2); else UnityEngine.Debug.LogWarning("warning missing method CreateInstance"); 
             args = new Type[]{typeof(System.Type), typeof(System.Int32[])};
             method = type.GetMethod("CreateInstance", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, CreateInstance_3);
+            if (method != null) app.RegisterCLRMethodRedirection(method, CreateInstance_3); else UnityEngine.Debug.LogWarning("warning missing method CreateInstance"); 
             args = new Type[]{typeof(System.Type), typeof(System.Int64[])};
             method = type.GetMethod("CreateInstance", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, CreateInstance_4);
+            if (method != null) app.RegisterCLRMethodRedirection(method, CreateInstance_4); else UnityEngine.Debug.LogWarning("warning missing method CreateInstance"); 
             args = new Type[]{typeof(System.Type), typeof(System.Int32[]), typeof(System.Int32[])};
             method = type.GetMethod("CreateInstance", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, CreateInstance_5);
+            if (method != null) app.RegisterCLRMethodRedirection(method, CreateInstance_5); else UnityEngine.Debug.LogWarning("warning missing method CreateInstance"); 
             args = new Type[]{typeof(System.Array), typeof(System.Array), typeof(System.Int32)};
             method = type.GetMethod("Copy", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Copy_6);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Copy_6); else UnityEngine.Debug.LogWarning("warning missing method Copy"); 
             args = new Type[]{typeof(System.Array), typeof(System.Int32), typeof(System.Array), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("Copy", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Copy_7);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Copy_7); else UnityEngine.Debug.LogWarning("warning missing method Copy"); 
             args = new Type[]{typeof(System.Array), typeof(System.Int32), typeof(System.Array), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("ConstrainedCopy", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ConstrainedCopy_8);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ConstrainedCopy_8); else UnityEngine.Debug.LogWarning("warning missing method ConstrainedCopy"); 
             args = new Type[]{typeof(System.Array), typeof(System.Array), typeof(System.Int64)};
             method = type.GetMethod("Copy", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Copy_9);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Copy_9); else UnityEngine.Debug.LogWarning("warning missing method Copy"); 
             args = new Type[]{typeof(System.Array), typeof(System.Int64), typeof(System.Array), typeof(System.Int64), typeof(System.Int64)};
             method = type.GetMethod("Copy", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Copy_10);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Copy_10); else UnityEngine.Debug.LogWarning("warning missing method Copy"); 
             args = new Type[]{typeof(System.Array), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("Clear", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Clear_11);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Clear_11); else UnityEngine.Debug.LogWarning("warning missing method Clear"); 
             args = new Type[]{typeof(System.Int32[])};
             method = type.GetMethod("GetValue", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetValue_12);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetValue_12); else UnityEngine.Debug.LogWarning("warning missing method GetValue"); 
             args = new Type[]{typeof(System.Int32)};
             method = type.GetMethod("GetValue", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetValue_13);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetValue_13); else UnityEngine.Debug.LogWarning("warning missing method GetValue"); 
             args = new Type[]{typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("GetValue", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetValue_14);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetValue_14); else UnityEngine.Debug.LogWarning("warning missing method GetValue"); 
             args = new Type[]{typeof(System.Int32), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("GetValue", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetValue_15);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetValue_15); else UnityEngine.Debug.LogWarning("warning missing method GetValue"); 
             args = new Type[]{typeof(System.Int64)};
             method = type.GetMethod("GetValue", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetValue_16);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetValue_16); else UnityEngine.Debug.LogWarning("warning missing method GetValue"); 
             args = new Type[]{typeof(System.Int64), typeof(System.Int64)};
             method = type.GetMethod("GetValue", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetValue_17);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetValue_17); else UnityEngine.Debug.LogWarning("warning missing method GetValue"); 
             args = new Type[]{typeof(System.Int64), typeof(System.Int64), typeof(System.Int64)};
             method = type.GetMethod("GetValue", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetValue_18);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetValue_18); else UnityEngine.Debug.LogWarning("warning missing method GetValue"); 
             args = new Type[]{typeof(System.Int64[])};
             method = type.GetMethod("GetValue", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetValue_19);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetValue_19); else UnityEngine.Debug.LogWarning("warning missing method GetValue"); 
             args = new Type[]{typeof(System.Object), typeof(System.Int32)};
             method = type.GetMethod("SetValue", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, SetValue_20);
+            if (method != null) app.RegisterCLRMethodRedirection(method, SetValue_20); else UnityEngine.Debug.LogWarning("warning missing method SetValue"); 
             args = new Type[]{typeof(System.Object), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("SetValue", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, SetValue_21);
+            if (method != null) app.RegisterCLRMethodRedirection(method, SetValue_21); else UnityEngine.Debug.LogWarning("warning missing method SetValue"); 
             args = new Type[]{typeof(System.Object), typeof(System.Int32), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("SetValue", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, SetValue_22);
+            if (method != null) app.RegisterCLRMethodRedirection(method, SetValue_22); else UnityEngine.Debug.LogWarning("warning missing method SetValue"); 
             args = new Type[]{typeof(System.Object), typeof(System.Int32[])};
             method = type.GetMethod("SetValue", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, SetValue_23);
+            if (method != null) app.RegisterCLRMethodRedirection(method, SetValue_23); else UnityEngine.Debug.LogWarning("warning missing method SetValue"); 
             args = new Type[]{typeof(System.Object), typeof(System.Int64)};
             method = type.GetMethod("SetValue", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, SetValue_24);
+            if (method != null) app.RegisterCLRMethodRedirection(method, SetValue_24); else UnityEngine.Debug.LogWarning("warning missing method SetValue"); 
             args = new Type[]{typeof(System.Object), typeof(System.Int64), typeof(System.Int64)};
             method = type.GetMethod("SetValue", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, SetValue_25);
+            if (method != null) app.RegisterCLRMethodRedirection(method, SetValue_25); else UnityEngine.Debug.LogWarning("warning missing method SetValue"); 
             args = new Type[]{typeof(System.Object), typeof(System.Int64), typeof(System.Int64), typeof(System.Int64)};
             method = type.GetMethod("SetValue", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, SetValue_26);
+            if (method != null) app.RegisterCLRMethodRedirection(method, SetValue_26); else UnityEngine.Debug.LogWarning("warning missing method SetValue"); 
             args = new Type[]{typeof(System.Object), typeof(System.Int64[])};
             method = type.GetMethod("SetValue", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, SetValue_27);
+            if (method != null) app.RegisterCLRMethodRedirection(method, SetValue_27); else UnityEngine.Debug.LogWarning("warning missing method SetValue"); 
             args = new Type[]{};
             method = type.GetMethod("get_Length", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, get_Length_28);
+            if (method != null) app.RegisterCLRMethodRedirection(method, get_Length_28); else UnityEngine.Debug.LogWarning("warning missing method get_Length"); 
             args = new Type[]{};
             method = type.GetMethod("get_LongLength", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, get_LongLength_29);
+            if (method != null) app.RegisterCLRMethodRedirection(method, get_LongLength_29); else UnityEngine.Debug.LogWarning("warning missing method get_LongLength"); 
             args = new Type[]{typeof(System.Int32)};
             method = type.GetMethod("GetLength", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetLength_30);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetLength_30); else UnityEngine.Debug.LogWarning("warning missing method GetLength"); 
             args = new Type[]{typeof(System.Int32)};
             method = type.GetMethod("GetLongLength", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetLongLength_31);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetLongLength_31); else UnityEngine.Debug.LogWarning("warning missing method GetLongLength"); 
             args = new Type[]{};
             method = type.GetMethod("get_Rank", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, get_Rank_32);
+            if (method != null) app.RegisterCLRMethodRedirection(method, get_Rank_32); else UnityEngine.Debug.LogWarning("warning missing method get_Rank"); 
             args = new Type[]{typeof(System.Int32)};
             method = type.GetMethod("GetUpperBound", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetUpperBound_33);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetUpperBound_33); else UnityEngine.Debug.LogWarning("warning missing method GetUpperBound"); 
             args = new Type[]{typeof(System.Int32)};
             method = type.GetMethod("GetLowerBound", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetLowerBound_34);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetLowerBound_34); else UnityEngine.Debug.LogWarning("warning missing method GetLowerBound"); 
             args = new Type[]{};
             method = type.GetMethod("get_SyncRoot", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, get_SyncRoot_35);
+            if (method != null) app.RegisterCLRMethodRedirection(method, get_SyncRoot_35); else UnityEngine.Debug.LogWarning("warning missing method get_SyncRoot"); 
             args = new Type[]{};
             method = type.GetMethod("get_IsReadOnly", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, get_IsReadOnly_36);
+            if (method != null) app.RegisterCLRMethodRedirection(method, get_IsReadOnly_36); else UnityEngine.Debug.LogWarning("warning missing method get_IsReadOnly"); 
             args = new Type[]{};
             method = type.GetMethod("get_IsFixedSize", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, get_IsFixedSize_37);
+            if (method != null) app.RegisterCLRMethodRedirection(method, get_IsFixedSize_37); else UnityEngine.Debug.LogWarning("warning missing method get_IsFixedSize"); 
             args = new Type[]{};
             method = type.GetMethod("get_IsSynchronized", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, get_IsSynchronized_38);
+            if (method != null) app.RegisterCLRMethodRedirection(method, get_IsSynchronized_38); else UnityEngine.Debug.LogWarning("warning missing method get_IsSynchronized"); 
             args = new Type[]{};
             method = type.GetMethod("Clone", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Clone_39);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Clone_39); else UnityEngine.Debug.LogWarning("warning missing method Clone"); 
             args = new Type[]{typeof(System.Array), typeof(System.Object)};
             method = type.GetMethod("BinarySearch", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, BinarySearch_40);
+            if (method != null) app.RegisterCLRMethodRedirection(method, BinarySearch_40); else UnityEngine.Debug.LogWarning("warning missing method BinarySearch"); 
             args = new Type[]{typeof(System.Array), typeof(System.Int32), typeof(System.Int32), typeof(System.Object)};
             method = type.GetMethod("BinarySearch", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, BinarySearch_41);
+            if (method != null) app.RegisterCLRMethodRedirection(method, BinarySearch_41); else UnityEngine.Debug.LogWarning("warning missing method BinarySearch"); 
             args = new Type[]{typeof(System.Array), typeof(System.Object), typeof(System.Collections.IComparer)};
             method = type.GetMethod("BinarySearch", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, BinarySearch_42);
+            if (method != null) app.RegisterCLRMethodRedirection(method, BinarySearch_42); else UnityEngine.Debug.LogWarning("warning missing method BinarySearch"); 
             args = new Type[]{typeof(System.Array), typeof(System.Int32), typeof(System.Int32), typeof(System.Object), typeof(System.Collections.IComparer)};
             method = type.GetMethod("BinarySearch", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, BinarySearch_43);
+            if (method != null) app.RegisterCLRMethodRedirection(method, BinarySearch_43); else UnityEngine.Debug.LogWarning("warning missing method BinarySearch"); 
             args = new Type[]{typeof(System.Array), typeof(System.Int32)};
             method = type.GetMethod("CopyTo", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, CopyTo_44);
+            if (method != null) app.RegisterCLRMethodRedirection(method, CopyTo_44); else UnityEngine.Debug.LogWarning("warning missing method CopyTo"); 
             args = new Type[]{typeof(System.Array), typeof(System.Int64)};
             method = type.GetMethod("CopyTo", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, CopyTo_45);
+            if (method != null) app.RegisterCLRMethodRedirection(method, CopyTo_45); else UnityEngine.Debug.LogWarning("warning missing method CopyTo"); 
             args = new Type[]{};
             method = type.GetMethod("GetEnumerator", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetEnumerator_46);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetEnumerator_46); else UnityEngine.Debug.LogWarning("warning missing method GetEnumerator"); 
             args = new Type[]{typeof(System.Array), typeof(System.Object)};
             method = type.GetMethod("IndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IndexOf_47);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IndexOf_47); else UnityEngine.Debug.LogWarning("warning missing method IndexOf"); 
             args = new Type[]{typeof(System.Array), typeof(System.Object), typeof(System.Int32)};
             method = type.GetMethod("IndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IndexOf_48);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IndexOf_48); else UnityEngine.Debug.LogWarning("warning missing method IndexOf"); 
             args = new Type[]{typeof(System.Array), typeof(System.Object), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("IndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IndexOf_49);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IndexOf_49); else UnityEngine.Debug.LogWarning("warning missing method IndexOf"); 
             args = new Type[]{typeof(System.Array), typeof(System.Object)};
             method = type.GetMethod("LastIndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, LastIndexOf_50);
+            if (method != null) app.RegisterCLRMethodRedirection(method, LastIndexOf_50); else UnityEngine.Debug.LogWarning("warning missing method LastIndexOf"); 
             args = new Type[]{typeof(System.Array), typeof(System.Object), typeof(System.Int32)};
             method = type.GetMethod("LastIndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, LastIndexOf_51);
+            if (method != null) app.RegisterCLRMethodRedirection(method, LastIndexOf_51); else UnityEngine.Debug.LogWarning("warning missing method LastIndexOf"); 
             args = new Type[]{typeof(System.Array), typeof(System.Object), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("LastIndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, LastIndexOf_52);
+            if (method != null) app.RegisterCLRMethodRedirection(method, LastIndexOf_52); else UnityEngine.Debug.LogWarning("warning missing method LastIndexOf"); 
             args = new Type[]{typeof(System.Array)};
             method = type.GetMethod("Reverse", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Reverse_53);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Reverse_53); else UnityEngine.Debug.LogWarning("warning missing method Reverse"); 
             args = new Type[]{typeof(System.Array), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("Reverse", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Reverse_54);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Reverse_54); else UnityEngine.Debug.LogWarning("warning missing method Reverse"); 
             args = new Type[]{typeof(System.Array)};
             method = type.GetMethod("Sort", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Sort_55);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Sort_55); else UnityEngine.Debug.LogWarning("warning missing method Sort"); 
             args = new Type[]{typeof(System.Array), typeof(System.Array)};
             method = type.GetMethod("Sort", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Sort_56);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Sort_56); else UnityEngine.Debug.LogWarning("warning missing method Sort"); 
             args = new Type[]{typeof(System.Array), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("Sort", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Sort_57);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Sort_57); else UnityEngine.Debug.LogWarning("warning missing method Sort"); 
             args = new Type[]{typeof(System.Array), typeof(System.Array), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("Sort", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Sort_58);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Sort_58); else UnityEngine.Debug.LogWarning("warning missing method Sort"); 
             args = new Type[]{typeof(System.Array), typeof(System.Collections.IComparer)};
             method = type.GetMethod("Sort", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Sort_59);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Sort_59); else UnityEngine.Debug.LogWarning("warning missing method Sort"); 
             args = new Type[]{typeof(System.Array), typeof(System.Array), typeof(System.Collections.IComparer)};
             method = type.GetMethod("Sort", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Sort_60);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Sort_60); else UnityEngine.Debug.LogWarning("warning missing method Sort"); 
             args = new Type[]{typeof(System.Array), typeof(System.Int32), typeof(System.Int32), typeof(System.Collections.IComparer)};
             method = type.GetMethod("Sort", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Sort_61);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Sort_61); else UnityEngine.Debug.LogWarning("warning missing method Sort"); 
             args = new Type[]{typeof(System.Array), typeof(System.Array), typeof(System.Int32), typeof(System.Int32), typeof(System.Collections.IComparer)};
             method = type.GetMethod("Sort", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Sort_62);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Sort_62); else UnityEngine.Debug.LogWarning("warning missing method Sort"); 
             args = new Type[]{};
             method = type.GetMethod("Initialize", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Initialize_63);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Initialize_63); else UnityEngine.Debug.LogWarning("warning missing method Initialize"); 
+
+
+            app.RegisterCLRCreateArrayInstance(type, s => new System.Array[s]);
 
 
         }
@@ -233,9 +238,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* CreateInstance_1(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -256,9 +261,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* CreateInstance_2(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -281,9 +286,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* CreateInstance_3(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -303,9 +308,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* CreateInstance_4(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -325,9 +330,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* CreateInstance_5(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -350,9 +355,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Copy_6(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -498,9 +503,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* GetValue_13(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -520,9 +525,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* GetValue_14(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -544,9 +549,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* GetValue_15(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -570,9 +575,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* GetValue_16(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -592,9 +597,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* GetValue_17(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -616,9 +621,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* GetValue_18(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -642,9 +647,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* GetValue_19(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -665,9 +670,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* SetValue_20(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -986,9 +991,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* get_IsReadOnly_36(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -1057,9 +1062,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* BinarySearch_40(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -1207,9 +1212,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* IndexOf_47(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -1536,6 +1541,8 @@ namespace ILRuntime.Runtime.Generated
 
             return __ret;
         }
+
+
 
 
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 using ILRuntime.CLR.TypeSystem;
 using ILRuntime.CLR.Method;
@@ -18,17 +19,21 @@ namespace ILRuntime.Runtime.Generated
         {
             BindingFlags flag = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
             MethodBase method;
+            FieldInfo field;
             Type[] args;
             Type type = typeof(System.ValueType);
             args = new Type[]{typeof(System.Object)};
             method = type.GetMethod("Equals", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Equals_0);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Equals_0); else UnityEngine.Debug.LogWarning("warning missing method Equals"); 
             args = new Type[]{};
             method = type.GetMethod("GetHashCode", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetHashCode_1);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetHashCode_1); else UnityEngine.Debug.LogWarning("warning missing method GetHashCode"); 
             args = new Type[]{};
             method = type.GetMethod("ToString", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ToString_2);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToString_2); else UnityEngine.Debug.LogWarning("warning missing method ToString"); 
+
+
+            app.RegisterCLRCreateArrayInstance(type, s => new System.ValueType[s]);
 
 
         }
@@ -83,8 +88,10 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.ToString();
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
+
+
 
 
 

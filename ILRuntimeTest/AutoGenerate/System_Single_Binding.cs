@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 using ILRuntime.CLR.TypeSystem;
 using ILRuntime.CLR.Method;
@@ -18,68 +19,84 @@ namespace ILRuntime.Runtime.Generated
         {
             BindingFlags flag = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
             MethodBase method;
+            FieldInfo field;
             Type[] args;
             Type type = typeof(System.Single);
             args = new Type[]{typeof(System.Single)};
             method = type.GetMethod("IsInfinity", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IsInfinity_0);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IsInfinity_0); else UnityEngine.Debug.LogWarning("warning missing method IsInfinity"); 
             args = new Type[]{typeof(System.Single)};
             method = type.GetMethod("IsPositiveInfinity", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IsPositiveInfinity_1);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IsPositiveInfinity_1); else UnityEngine.Debug.LogWarning("warning missing method IsPositiveInfinity"); 
             args = new Type[]{typeof(System.Single)};
             method = type.GetMethod("IsNegativeInfinity", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IsNegativeInfinity_2);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IsNegativeInfinity_2); else UnityEngine.Debug.LogWarning("warning missing method IsNegativeInfinity"); 
             args = new Type[]{typeof(System.Single)};
             method = type.GetMethod("IsNaN", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IsNaN_3);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IsNaN_3); else UnityEngine.Debug.LogWarning("warning missing method IsNaN"); 
             args = new Type[]{typeof(System.Object)};
             method = type.GetMethod("CompareTo", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, CompareTo_4);
+            if (method != null) app.RegisterCLRMethodRedirection(method, CompareTo_4); else UnityEngine.Debug.LogWarning("warning missing method CompareTo"); 
             args = new Type[]{typeof(System.Single)};
             method = type.GetMethod("CompareTo", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, CompareTo_5);
+            if (method != null) app.RegisterCLRMethodRedirection(method, CompareTo_5); else UnityEngine.Debug.LogWarning("warning missing method CompareTo"); 
             args = new Type[]{typeof(System.Object)};
             method = type.GetMethod("Equals", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Equals_6);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Equals_6); else UnityEngine.Debug.LogWarning("warning missing method Equals"); 
             args = new Type[]{typeof(System.Single)};
             method = type.GetMethod("Equals", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Equals_7);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Equals_7); else UnityEngine.Debug.LogWarning("warning missing method Equals"); 
             args = new Type[]{};
             method = type.GetMethod("GetHashCode", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetHashCode_8);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetHashCode_8); else UnityEngine.Debug.LogWarning("warning missing method GetHashCode"); 
             args = new Type[]{typeof(System.IFormatProvider)};
             method = type.GetMethod("ToString", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ToString_9);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToString_9); else UnityEngine.Debug.LogWarning("warning missing method ToString"); 
             args = new Type[]{typeof(System.String)};
             method = type.GetMethod("ToString", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ToString_10);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToString_10); else UnityEngine.Debug.LogWarning("warning missing method ToString"); 
             args = new Type[]{typeof(System.String)};
             method = type.GetMethod("Parse", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Parse_11);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Parse_11); else UnityEngine.Debug.LogWarning("warning missing method Parse"); 
             args = new Type[]{typeof(System.String), typeof(System.Globalization.NumberStyles)};
             method = type.GetMethod("Parse", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Parse_12);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Parse_12); else UnityEngine.Debug.LogWarning("warning missing method Parse"); 
             args = new Type[]{typeof(System.String), typeof(System.IFormatProvider)};
             method = type.GetMethod("Parse", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Parse_13);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Parse_13); else UnityEngine.Debug.LogWarning("warning missing method Parse"); 
             args = new Type[]{typeof(System.String), typeof(System.Globalization.NumberStyles), typeof(System.IFormatProvider)};
             method = type.GetMethod("Parse", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Parse_14);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Parse_14); else UnityEngine.Debug.LogWarning("warning missing method Parse"); 
             args = new Type[]{typeof(System.String), typeof(System.Single).MakeByRefType()};
             method = type.GetMethod("TryParse", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, TryParse_15);
+            if (method != null) app.RegisterCLRMethodRedirection(method, TryParse_15); else UnityEngine.Debug.LogWarning("warning missing method TryParse"); 
             args = new Type[]{typeof(System.String), typeof(System.Globalization.NumberStyles), typeof(System.IFormatProvider), typeof(System.Single).MakeByRefType()};
             method = type.GetMethod("TryParse", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, TryParse_16);
+            if (method != null) app.RegisterCLRMethodRedirection(method, TryParse_16); else UnityEngine.Debug.LogWarning("warning missing method TryParse"); 
             args = new Type[]{};
             method = type.GetMethod("GetTypeCode", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetTypeCode_17);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetTypeCode_17); else UnityEngine.Debug.LogWarning("warning missing method GetTypeCode"); 
             args = new Type[]{};
             method = type.GetMethod("ToString", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ToString_18);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToString_18); else UnityEngine.Debug.LogWarning("warning missing method ToString"); 
             args = new Type[]{typeof(System.String), typeof(System.IFormatProvider)};
             method = type.GetMethod("ToString", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ToString_19);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToString_19); else UnityEngine.Debug.LogWarning("warning missing method ToString"); 
+
+            field = type.GetField("MinValue", flag);
+            if (field != null) app.RegisterCLRFieldGetter(field, get_MinValue_0); else UnityEngine.Debug.LogWarning("warning missing field MinValue");
+            field = type.GetField("Epsilon", flag);
+            if (field != null) app.RegisterCLRFieldGetter(field, get_Epsilon_1); else UnityEngine.Debug.LogWarning("warning missing field Epsilon");
+            field = type.GetField("MaxValue", flag);
+            if (field != null) app.RegisterCLRFieldGetter(field, get_MaxValue_2); else UnityEngine.Debug.LogWarning("warning missing field MaxValue");
+            field = type.GetField("PositiveInfinity", flag);
+            if (field != null) app.RegisterCLRFieldGetter(field, get_PositiveInfinity_3); else UnityEngine.Debug.LogWarning("warning missing field PositiveInfinity");
+            field = type.GetField("NegativeInfinity", flag);
+            if (field != null) app.RegisterCLRFieldGetter(field, get_NegativeInfinity_4); else UnityEngine.Debug.LogWarning("warning missing field NegativeInfinity");
+            field = type.GetField("NaN", flag);
+            if (field != null) app.RegisterCLRFieldGetter(field, get_NaN_5); else UnityEngine.Debug.LogWarning("warning missing field NaN");
+
+            app.RegisterCLRCreateArrayInstance(type, s => new System.Single[s]);
 
 
         }
@@ -100,7 +117,7 @@ namespace ILRuntime.Runtime.Generated
                         else
                         {
                             var t = __domain.GetType(instance_of_fieldReference.GetType()) as CLRType;
-                            instance_of_this_method = (System.Single)t.GetField(ptr_of_this_method->ValueLow).GetValue(instance_of_fieldReference);
+                            instance_of_this_method = (System.Single)t.GetFieldValue(ptr_of_this_method->ValueLow, instance_of_fieldReference);
                         }
                     }
                     break;
@@ -113,7 +130,7 @@ namespace ILRuntime.Runtime.Generated
                         }
                         else
                         {
-                            instance_of_this_method = (System.Single)((CLRType)t).GetField(ptr_of_this_method->ValueLow).GetValue(null);
+                            instance_of_this_method = (System.Single)((CLRType)t).GetFieldValue(ptr_of_this_method->ValueLow, null);
                         }
                     }
                     break;
@@ -288,7 +305,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.ToString(provider);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* ToString_10(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -304,7 +321,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.ToString(format);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Parse_11(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -417,7 +434,7 @@ namespace ILRuntime.Runtime.Generated
                         else
                         {
                             var t = __domain.GetType(___obj.GetType()) as CLRType;
-                            t.GetField(ptr_of_this_method->ValueLow).SetValue(___obj, result);
+                            t.SetFieldValue(ptr_of_this_method->ValueLow, ref ___obj, result);
                         }
                     }
                     break;
@@ -430,7 +447,7 @@ namespace ILRuntime.Runtime.Generated
                         }
                         else
                         {
-                            ((CLRType)t).GetField(ptr_of_this_method->ValueLow).SetValue(null, result);
+                            ((CLRType)t).SetStaticFieldValue(ptr_of_this_method->ValueLow, result);
                         }
                     }
                     break;
@@ -487,7 +504,7 @@ namespace ILRuntime.Runtime.Generated
                         else
                         {
                             var t = __domain.GetType(___obj.GetType()) as CLRType;
-                            t.GetField(ptr_of_this_method->ValueLow).SetValue(___obj, result);
+                            t.SetFieldValue(ptr_of_this_method->ValueLow, ref ___obj, result);
                         }
                     }
                     break;
@@ -500,7 +517,7 @@ namespace ILRuntime.Runtime.Generated
                         }
                         else
                         {
-                            ((CLRType)t).GetField(ptr_of_this_method->ValueLow).SetValue(null, result);
+                            ((CLRType)t).SetStaticFieldValue(ptr_of_this_method->ValueLow, result);
                         }
                     }
                     break;
@@ -527,7 +544,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.GetTypeCode();
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* ToString_18(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -540,7 +557,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.ToString();
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* ToString_19(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -559,7 +576,33 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.ToString(format, provider);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
+        }
+
+
+        static object get_MinValue_0(ref object o)
+        {
+            return System.Single.MinValue;
+        }
+        static object get_Epsilon_1(ref object o)
+        {
+            return System.Single.Epsilon;
+        }
+        static object get_MaxValue_2(ref object o)
+        {
+            return System.Single.MaxValue;
+        }
+        static object get_PositiveInfinity_3(ref object o)
+        {
+            return System.Single.PositiveInfinity;
+        }
+        static object get_NegativeInfinity_4(ref object o)
+        {
+            return System.Single.NegativeInfinity;
+        }
+        static object get_NaN_5(ref object o)
+        {
+            return System.Single.NaN;
         }
 
 

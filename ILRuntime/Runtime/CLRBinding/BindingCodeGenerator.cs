@@ -534,7 +534,7 @@ namespace ILRuntime.Runtime.Generated
             }");
                     sb.AppendLine();
                 }
-                sb.AppendLine("            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);");
+                sb.AppendLine("            return StackObject.PushObject(__ret, __mStack, result_of_this_method);");
 
                 sb.AppendLine("        }");
                 sb.AppendLine();
@@ -1080,10 +1080,10 @@ namespace ILRuntime.Runtime.Generated
                     sb.AppendLine(@"            object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }");
                 }
-                sb.AppendLine("            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);");
+                sb.AppendLine("            return StackObject.PushObject(__ret, __mStack, result_of_this_method);");
             }
         }
 

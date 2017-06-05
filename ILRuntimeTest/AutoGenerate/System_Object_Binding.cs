@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 using ILRuntime.CLR.TypeSystem;
 using ILRuntime.CLR.Method;
@@ -18,26 +19,31 @@ namespace ILRuntime.Runtime.Generated
         {
             BindingFlags flag = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
             MethodBase method;
+            FieldInfo field;
             Type[] args;
             Type type = typeof(System.Object);
             args = new Type[]{};
             method = type.GetMethod("ToString", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ToString_0);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToString_0); else UnityEngine.Debug.LogWarning("warning missing method ToString"); 
             args = new Type[]{typeof(System.Object)};
             method = type.GetMethod("Equals", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Equals_1);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Equals_1); else UnityEngine.Debug.LogWarning("warning missing method Equals"); 
             args = new Type[]{typeof(System.Object), typeof(System.Object)};
             method = type.GetMethod("Equals", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Equals_2);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Equals_2); else UnityEngine.Debug.LogWarning("warning missing method Equals"); 
             args = new Type[]{typeof(System.Object), typeof(System.Object)};
             method = type.GetMethod("ReferenceEquals", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ReferenceEquals_3);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ReferenceEquals_3); else UnityEngine.Debug.LogWarning("warning missing method ReferenceEquals"); 
             args = new Type[]{};
             method = type.GetMethod("GetHashCode", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetHashCode_4);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetHashCode_4); else UnityEngine.Debug.LogWarning("warning missing method GetHashCode"); 
             args = new Type[]{};
             method = type.GetMethod("GetType", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetType_5);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetType_5); else UnityEngine.Debug.LogWarning("warning missing method GetType"); 
+
+
+            app.RegisterCLRCreateDefaultInstance(type, () => new System.Object());
+            app.RegisterCLRCreateArrayInstance(type, s => new System.Object[s]);
 
             args = new Type[]{};
             method = type.GetConstructor(flag, null, args, null);
@@ -58,7 +64,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.ToString();
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Equals_1(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -151,10 +157,12 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
+
+
 
 
         static StackObject* Ctor_0(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -165,7 +173,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = new System.Object();
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
 

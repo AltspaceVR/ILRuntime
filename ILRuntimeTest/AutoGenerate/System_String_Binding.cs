@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 using ILRuntime.CLR.TypeSystem;
 using ILRuntime.CLR.Method;
@@ -18,350 +19,356 @@ namespace ILRuntime.Runtime.Generated
         {
             BindingFlags flag = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
             MethodBase method;
+            FieldInfo field;
             Type[] args;
             Type type = typeof(System.String);
             args = new Type[]{typeof(System.String), typeof(System.String[])};
             method = type.GetMethod("Join", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Join_0);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Join_0); else UnityEngine.Debug.LogWarning("warning missing method Join"); 
             args = new Type[]{typeof(System.String), typeof(System.String[]), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("Join", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Join_1);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Join_1); else UnityEngine.Debug.LogWarning("warning missing method Join"); 
             args = new Type[]{typeof(System.Object)};
             method = type.GetMethod("Equals", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Equals_2);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Equals_2); else UnityEngine.Debug.LogWarning("warning missing method Equals"); 
             args = new Type[]{typeof(System.String)};
             method = type.GetMethod("Equals", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Equals_3);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Equals_3); else UnityEngine.Debug.LogWarning("warning missing method Equals"); 
             args = new Type[]{typeof(System.String), typeof(System.StringComparison)};
             method = type.GetMethod("Equals", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Equals_4);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Equals_4); else UnityEngine.Debug.LogWarning("warning missing method Equals"); 
             args = new Type[]{typeof(System.String), typeof(System.String)};
             method = type.GetMethod("Equals", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Equals_5);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Equals_5); else UnityEngine.Debug.LogWarning("warning missing method Equals"); 
             args = new Type[]{typeof(System.String), typeof(System.String), typeof(System.StringComparison)};
             method = type.GetMethod("Equals", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Equals_6);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Equals_6); else UnityEngine.Debug.LogWarning("warning missing method Equals"); 
             args = new Type[]{typeof(System.String), typeof(System.String)};
             method = type.GetMethod("op_Equality", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, op_Equality_7);
+            if (method != null) app.RegisterCLRMethodRedirection(method, op_Equality_7); else UnityEngine.Debug.LogWarning("warning missing method op_Equality"); 
             args = new Type[]{typeof(System.String), typeof(System.String)};
             method = type.GetMethod("op_Inequality", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, op_Inequality_8);
+            if (method != null) app.RegisterCLRMethodRedirection(method, op_Inequality_8); else UnityEngine.Debug.LogWarning("warning missing method op_Inequality"); 
             args = new Type[]{typeof(System.Int32)};
             method = type.GetMethod("get_Chars", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, get_Chars_9);
+            if (method != null) app.RegisterCLRMethodRedirection(method, get_Chars_9); else UnityEngine.Debug.LogWarning("warning missing method get_Chars"); 
             args = new Type[]{typeof(System.Int32), typeof(System.Char[]), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("CopyTo", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, CopyTo_10);
+            if (method != null) app.RegisterCLRMethodRedirection(method, CopyTo_10); else UnityEngine.Debug.LogWarning("warning missing method CopyTo"); 
             args = new Type[]{};
             method = type.GetMethod("ToCharArray", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ToCharArray_11);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToCharArray_11); else UnityEngine.Debug.LogWarning("warning missing method ToCharArray"); 
             args = new Type[]{typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("ToCharArray", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ToCharArray_12);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToCharArray_12); else UnityEngine.Debug.LogWarning("warning missing method ToCharArray"); 
             args = new Type[]{typeof(System.String)};
             method = type.GetMethod("IsNullOrEmpty", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IsNullOrEmpty_13);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IsNullOrEmpty_13); else UnityEngine.Debug.LogWarning("warning missing method IsNullOrEmpty"); 
             args = new Type[]{};
             method = type.GetMethod("GetHashCode", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetHashCode_14);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetHashCode_14); else UnityEngine.Debug.LogWarning("warning missing method GetHashCode"); 
             args = new Type[]{};
             method = type.GetMethod("get_Length", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, get_Length_15);
+            if (method != null) app.RegisterCLRMethodRedirection(method, get_Length_15); else UnityEngine.Debug.LogWarning("warning missing method get_Length"); 
             args = new Type[]{typeof(System.Char[])};
             method = type.GetMethod("Split", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Split_16);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Split_16); else UnityEngine.Debug.LogWarning("warning missing method Split"); 
             args = new Type[]{typeof(System.Char[]), typeof(System.Int32)};
             method = type.GetMethod("Split", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Split_17);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Split_17); else UnityEngine.Debug.LogWarning("warning missing method Split"); 
             args = new Type[]{typeof(System.Char[]), typeof(System.StringSplitOptions)};
             method = type.GetMethod("Split", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Split_18);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Split_18); else UnityEngine.Debug.LogWarning("warning missing method Split"); 
             args = new Type[]{typeof(System.Char[]), typeof(System.Int32), typeof(System.StringSplitOptions)};
             method = type.GetMethod("Split", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Split_19);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Split_19); else UnityEngine.Debug.LogWarning("warning missing method Split"); 
             args = new Type[]{typeof(System.String[]), typeof(System.StringSplitOptions)};
             method = type.GetMethod("Split", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Split_20);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Split_20); else UnityEngine.Debug.LogWarning("warning missing method Split"); 
             args = new Type[]{typeof(System.String[]), typeof(System.Int32), typeof(System.StringSplitOptions)};
             method = type.GetMethod("Split", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Split_21);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Split_21); else UnityEngine.Debug.LogWarning("warning missing method Split"); 
             args = new Type[]{typeof(System.Int32)};
             method = type.GetMethod("Substring", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Substring_22);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Substring_22); else UnityEngine.Debug.LogWarning("warning missing method Substring"); 
             args = new Type[]{typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("Substring", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Substring_23);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Substring_23); else UnityEngine.Debug.LogWarning("warning missing method Substring"); 
             args = new Type[]{typeof(System.Char[])};
             method = type.GetMethod("Trim", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Trim_24);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Trim_24); else UnityEngine.Debug.LogWarning("warning missing method Trim"); 
             args = new Type[]{typeof(System.Char[])};
             method = type.GetMethod("TrimStart", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, TrimStart_25);
+            if (method != null) app.RegisterCLRMethodRedirection(method, TrimStart_25); else UnityEngine.Debug.LogWarning("warning missing method TrimStart"); 
             args = new Type[]{typeof(System.Char[])};
             method = type.GetMethod("TrimEnd", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, TrimEnd_26);
+            if (method != null) app.RegisterCLRMethodRedirection(method, TrimEnd_26); else UnityEngine.Debug.LogWarning("warning missing method TrimEnd"); 
             args = new Type[]{};
             method = type.GetMethod("IsNormalized", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IsNormalized_27);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IsNormalized_27); else UnityEngine.Debug.LogWarning("warning missing method IsNormalized"); 
             args = new Type[]{typeof(System.Text.NormalizationForm)};
             method = type.GetMethod("IsNormalized", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IsNormalized_28);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IsNormalized_28); else UnityEngine.Debug.LogWarning("warning missing method IsNormalized"); 
             args = new Type[]{};
             method = type.GetMethod("Normalize", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Normalize_29);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Normalize_29); else UnityEngine.Debug.LogWarning("warning missing method Normalize"); 
             args = new Type[]{typeof(System.Text.NormalizationForm)};
             method = type.GetMethod("Normalize", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Normalize_30);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Normalize_30); else UnityEngine.Debug.LogWarning("warning missing method Normalize"); 
             args = new Type[]{typeof(System.String), typeof(System.String)};
             method = type.GetMethod("Compare", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Compare_31);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Compare_31); else UnityEngine.Debug.LogWarning("warning missing method Compare"); 
             args = new Type[]{typeof(System.String), typeof(System.String), typeof(System.Boolean)};
             method = type.GetMethod("Compare", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Compare_32);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Compare_32); else UnityEngine.Debug.LogWarning("warning missing method Compare"); 
             args = new Type[]{typeof(System.String), typeof(System.String), typeof(System.Globalization.CultureInfo), typeof(System.Globalization.CompareOptions)};
             method = type.GetMethod("Compare", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Compare_33);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Compare_33); else UnityEngine.Debug.LogWarning("warning missing method Compare"); 
             args = new Type[]{typeof(System.String), typeof(System.Int32), typeof(System.String), typeof(System.Int32), typeof(System.Int32), typeof(System.Globalization.CultureInfo), typeof(System.Globalization.CompareOptions)};
             method = type.GetMethod("Compare", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Compare_34);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Compare_34); else UnityEngine.Debug.LogWarning("warning missing method Compare"); 
             args = new Type[]{typeof(System.String), typeof(System.String), typeof(System.StringComparison)};
             method = type.GetMethod("Compare", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Compare_35);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Compare_35); else UnityEngine.Debug.LogWarning("warning missing method Compare"); 
             args = new Type[]{typeof(System.String), typeof(System.String), typeof(System.Boolean), typeof(System.Globalization.CultureInfo)};
             method = type.GetMethod("Compare", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Compare_36);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Compare_36); else UnityEngine.Debug.LogWarning("warning missing method Compare"); 
             args = new Type[]{typeof(System.String), typeof(System.Int32), typeof(System.String), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("Compare", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Compare_37);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Compare_37); else UnityEngine.Debug.LogWarning("warning missing method Compare"); 
             args = new Type[]{typeof(System.String), typeof(System.Int32), typeof(System.String), typeof(System.Int32), typeof(System.Int32), typeof(System.Boolean)};
             method = type.GetMethod("Compare", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Compare_38);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Compare_38); else UnityEngine.Debug.LogWarning("warning missing method Compare"); 
             args = new Type[]{typeof(System.String), typeof(System.Int32), typeof(System.String), typeof(System.Int32), typeof(System.Int32), typeof(System.Boolean), typeof(System.Globalization.CultureInfo)};
             method = type.GetMethod("Compare", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Compare_39);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Compare_39); else UnityEngine.Debug.LogWarning("warning missing method Compare"); 
             args = new Type[]{typeof(System.String), typeof(System.Int32), typeof(System.String), typeof(System.Int32), typeof(System.Int32), typeof(System.StringComparison)};
             method = type.GetMethod("Compare", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Compare_40);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Compare_40); else UnityEngine.Debug.LogWarning("warning missing method Compare"); 
             args = new Type[]{typeof(System.Object)};
             method = type.GetMethod("CompareTo", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, CompareTo_41);
+            if (method != null) app.RegisterCLRMethodRedirection(method, CompareTo_41); else UnityEngine.Debug.LogWarning("warning missing method CompareTo"); 
             args = new Type[]{typeof(System.String)};
             method = type.GetMethod("CompareTo", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, CompareTo_42);
+            if (method != null) app.RegisterCLRMethodRedirection(method, CompareTo_42); else UnityEngine.Debug.LogWarning("warning missing method CompareTo"); 
             args = new Type[]{typeof(System.String), typeof(System.String)};
             method = type.GetMethod("CompareOrdinal", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, CompareOrdinal_43);
+            if (method != null) app.RegisterCLRMethodRedirection(method, CompareOrdinal_43); else UnityEngine.Debug.LogWarning("warning missing method CompareOrdinal"); 
             args = new Type[]{typeof(System.String), typeof(System.Int32), typeof(System.String), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("CompareOrdinal", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, CompareOrdinal_44);
+            if (method != null) app.RegisterCLRMethodRedirection(method, CompareOrdinal_44); else UnityEngine.Debug.LogWarning("warning missing method CompareOrdinal"); 
             args = new Type[]{typeof(System.String)};
             method = type.GetMethod("Contains", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Contains_45);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Contains_45); else UnityEngine.Debug.LogWarning("warning missing method Contains"); 
             args = new Type[]{typeof(System.String)};
             method = type.GetMethod("EndsWith", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, EndsWith_46);
+            if (method != null) app.RegisterCLRMethodRedirection(method, EndsWith_46); else UnityEngine.Debug.LogWarning("warning missing method EndsWith"); 
             args = new Type[]{typeof(System.String), typeof(System.StringComparison)};
             method = type.GetMethod("EndsWith", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, EndsWith_47);
+            if (method != null) app.RegisterCLRMethodRedirection(method, EndsWith_47); else UnityEngine.Debug.LogWarning("warning missing method EndsWith"); 
             args = new Type[]{typeof(System.String), typeof(System.Boolean), typeof(System.Globalization.CultureInfo)};
             method = type.GetMethod("EndsWith", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, EndsWith_48);
+            if (method != null) app.RegisterCLRMethodRedirection(method, EndsWith_48); else UnityEngine.Debug.LogWarning("warning missing method EndsWith"); 
             args = new Type[]{typeof(System.Char)};
             method = type.GetMethod("IndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IndexOf_49);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IndexOf_49); else UnityEngine.Debug.LogWarning("warning missing method IndexOf"); 
             args = new Type[]{typeof(System.Char), typeof(System.Int32)};
             method = type.GetMethod("IndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IndexOf_50);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IndexOf_50); else UnityEngine.Debug.LogWarning("warning missing method IndexOf"); 
             args = new Type[]{typeof(System.Char), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("IndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IndexOf_51);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IndexOf_51); else UnityEngine.Debug.LogWarning("warning missing method IndexOf"); 
             args = new Type[]{typeof(System.Char[])};
             method = type.GetMethod("IndexOfAny", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IndexOfAny_52);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IndexOfAny_52); else UnityEngine.Debug.LogWarning("warning missing method IndexOfAny"); 
             args = new Type[]{typeof(System.Char[]), typeof(System.Int32)};
             method = type.GetMethod("IndexOfAny", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IndexOfAny_53);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IndexOfAny_53); else UnityEngine.Debug.LogWarning("warning missing method IndexOfAny"); 
             args = new Type[]{typeof(System.Char[]), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("IndexOfAny", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IndexOfAny_54);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IndexOfAny_54); else UnityEngine.Debug.LogWarning("warning missing method IndexOfAny"); 
             args = new Type[]{typeof(System.String)};
             method = type.GetMethod("IndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IndexOf_55);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IndexOf_55); else UnityEngine.Debug.LogWarning("warning missing method IndexOf"); 
             args = new Type[]{typeof(System.String), typeof(System.Int32)};
             method = type.GetMethod("IndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IndexOf_56);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IndexOf_56); else UnityEngine.Debug.LogWarning("warning missing method IndexOf"); 
             args = new Type[]{typeof(System.String), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("IndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IndexOf_57);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IndexOf_57); else UnityEngine.Debug.LogWarning("warning missing method IndexOf"); 
             args = new Type[]{typeof(System.String), typeof(System.StringComparison)};
             method = type.GetMethod("IndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IndexOf_58);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IndexOf_58); else UnityEngine.Debug.LogWarning("warning missing method IndexOf"); 
             args = new Type[]{typeof(System.String), typeof(System.Int32), typeof(System.StringComparison)};
             method = type.GetMethod("IndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IndexOf_59);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IndexOf_59); else UnityEngine.Debug.LogWarning("warning missing method IndexOf"); 
             args = new Type[]{typeof(System.String), typeof(System.Int32), typeof(System.Int32), typeof(System.StringComparison)};
             method = type.GetMethod("IndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IndexOf_60);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IndexOf_60); else UnityEngine.Debug.LogWarning("warning missing method IndexOf"); 
             args = new Type[]{typeof(System.Char)};
             method = type.GetMethod("LastIndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, LastIndexOf_61);
+            if (method != null) app.RegisterCLRMethodRedirection(method, LastIndexOf_61); else UnityEngine.Debug.LogWarning("warning missing method LastIndexOf"); 
             args = new Type[]{typeof(System.Char), typeof(System.Int32)};
             method = type.GetMethod("LastIndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, LastIndexOf_62);
+            if (method != null) app.RegisterCLRMethodRedirection(method, LastIndexOf_62); else UnityEngine.Debug.LogWarning("warning missing method LastIndexOf"); 
             args = new Type[]{typeof(System.Char), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("LastIndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, LastIndexOf_63);
+            if (method != null) app.RegisterCLRMethodRedirection(method, LastIndexOf_63); else UnityEngine.Debug.LogWarning("warning missing method LastIndexOf"); 
             args = new Type[]{typeof(System.Char[])};
             method = type.GetMethod("LastIndexOfAny", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, LastIndexOfAny_64);
+            if (method != null) app.RegisterCLRMethodRedirection(method, LastIndexOfAny_64); else UnityEngine.Debug.LogWarning("warning missing method LastIndexOfAny"); 
             args = new Type[]{typeof(System.Char[]), typeof(System.Int32)};
             method = type.GetMethod("LastIndexOfAny", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, LastIndexOfAny_65);
+            if (method != null) app.RegisterCLRMethodRedirection(method, LastIndexOfAny_65); else UnityEngine.Debug.LogWarning("warning missing method LastIndexOfAny"); 
             args = new Type[]{typeof(System.Char[]), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("LastIndexOfAny", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, LastIndexOfAny_66);
+            if (method != null) app.RegisterCLRMethodRedirection(method, LastIndexOfAny_66); else UnityEngine.Debug.LogWarning("warning missing method LastIndexOfAny"); 
             args = new Type[]{typeof(System.String)};
             method = type.GetMethod("LastIndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, LastIndexOf_67);
+            if (method != null) app.RegisterCLRMethodRedirection(method, LastIndexOf_67); else UnityEngine.Debug.LogWarning("warning missing method LastIndexOf"); 
             args = new Type[]{typeof(System.String), typeof(System.Int32)};
             method = type.GetMethod("LastIndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, LastIndexOf_68);
+            if (method != null) app.RegisterCLRMethodRedirection(method, LastIndexOf_68); else UnityEngine.Debug.LogWarning("warning missing method LastIndexOf"); 
             args = new Type[]{typeof(System.String), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("LastIndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, LastIndexOf_69);
+            if (method != null) app.RegisterCLRMethodRedirection(method, LastIndexOf_69); else UnityEngine.Debug.LogWarning("warning missing method LastIndexOf"); 
             args = new Type[]{typeof(System.String), typeof(System.StringComparison)};
             method = type.GetMethod("LastIndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, LastIndexOf_70);
+            if (method != null) app.RegisterCLRMethodRedirection(method, LastIndexOf_70); else UnityEngine.Debug.LogWarning("warning missing method LastIndexOf"); 
             args = new Type[]{typeof(System.String), typeof(System.Int32), typeof(System.StringComparison)};
             method = type.GetMethod("LastIndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, LastIndexOf_71);
+            if (method != null) app.RegisterCLRMethodRedirection(method, LastIndexOf_71); else UnityEngine.Debug.LogWarning("warning missing method LastIndexOf"); 
             args = new Type[]{typeof(System.String), typeof(System.Int32), typeof(System.Int32), typeof(System.StringComparison)};
             method = type.GetMethod("LastIndexOf", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, LastIndexOf_72);
+            if (method != null) app.RegisterCLRMethodRedirection(method, LastIndexOf_72); else UnityEngine.Debug.LogWarning("warning missing method LastIndexOf"); 
             args = new Type[]{typeof(System.Int32)};
             method = type.GetMethod("PadLeft", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, PadLeft_73);
+            if (method != null) app.RegisterCLRMethodRedirection(method, PadLeft_73); else UnityEngine.Debug.LogWarning("warning missing method PadLeft"); 
             args = new Type[]{typeof(System.Int32), typeof(System.Char)};
             method = type.GetMethod("PadLeft", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, PadLeft_74);
+            if (method != null) app.RegisterCLRMethodRedirection(method, PadLeft_74); else UnityEngine.Debug.LogWarning("warning missing method PadLeft"); 
             args = new Type[]{typeof(System.Int32)};
             method = type.GetMethod("PadRight", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, PadRight_75);
+            if (method != null) app.RegisterCLRMethodRedirection(method, PadRight_75); else UnityEngine.Debug.LogWarning("warning missing method PadRight"); 
             args = new Type[]{typeof(System.Int32), typeof(System.Char)};
             method = type.GetMethod("PadRight", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, PadRight_76);
+            if (method != null) app.RegisterCLRMethodRedirection(method, PadRight_76); else UnityEngine.Debug.LogWarning("warning missing method PadRight"); 
             args = new Type[]{typeof(System.String)};
             method = type.GetMethod("StartsWith", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, StartsWith_77);
+            if (method != null) app.RegisterCLRMethodRedirection(method, StartsWith_77); else UnityEngine.Debug.LogWarning("warning missing method StartsWith"); 
             args = new Type[]{typeof(System.String), typeof(System.StringComparison)};
             method = type.GetMethod("StartsWith", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, StartsWith_78);
+            if (method != null) app.RegisterCLRMethodRedirection(method, StartsWith_78); else UnityEngine.Debug.LogWarning("warning missing method StartsWith"); 
             args = new Type[]{typeof(System.String), typeof(System.Boolean), typeof(System.Globalization.CultureInfo)};
             method = type.GetMethod("StartsWith", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, StartsWith_79);
+            if (method != null) app.RegisterCLRMethodRedirection(method, StartsWith_79); else UnityEngine.Debug.LogWarning("warning missing method StartsWith"); 
             args = new Type[]{};
             method = type.GetMethod("ToLower", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ToLower_80);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToLower_80); else UnityEngine.Debug.LogWarning("warning missing method ToLower"); 
             args = new Type[]{typeof(System.Globalization.CultureInfo)};
             method = type.GetMethod("ToLower", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ToLower_81);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToLower_81); else UnityEngine.Debug.LogWarning("warning missing method ToLower"); 
             args = new Type[]{};
             method = type.GetMethod("ToLowerInvariant", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ToLowerInvariant_82);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToLowerInvariant_82); else UnityEngine.Debug.LogWarning("warning missing method ToLowerInvariant"); 
             args = new Type[]{};
             method = type.GetMethod("ToUpper", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ToUpper_83);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToUpper_83); else UnityEngine.Debug.LogWarning("warning missing method ToUpper"); 
             args = new Type[]{typeof(System.Globalization.CultureInfo)};
             method = type.GetMethod("ToUpper", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ToUpper_84);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToUpper_84); else UnityEngine.Debug.LogWarning("warning missing method ToUpper"); 
             args = new Type[]{};
             method = type.GetMethod("ToUpperInvariant", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ToUpperInvariant_85);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToUpperInvariant_85); else UnityEngine.Debug.LogWarning("warning missing method ToUpperInvariant"); 
             args = new Type[]{};
             method = type.GetMethod("ToString", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ToString_86);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToString_86); else UnityEngine.Debug.LogWarning("warning missing method ToString"); 
             args = new Type[]{typeof(System.IFormatProvider)};
             method = type.GetMethod("ToString", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, ToString_87);
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToString_87); else UnityEngine.Debug.LogWarning("warning missing method ToString"); 
             args = new Type[]{};
             method = type.GetMethod("Clone", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Clone_88);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Clone_88); else UnityEngine.Debug.LogWarning("warning missing method Clone"); 
             args = new Type[]{};
             method = type.GetMethod("Trim", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Trim_89);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Trim_89); else UnityEngine.Debug.LogWarning("warning missing method Trim"); 
             args = new Type[]{typeof(System.Int32), typeof(System.String)};
             method = type.GetMethod("Insert", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Insert_90);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Insert_90); else UnityEngine.Debug.LogWarning("warning missing method Insert"); 
             args = new Type[]{typeof(System.Char), typeof(System.Char)};
             method = type.GetMethod("Replace", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Replace_91);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Replace_91); else UnityEngine.Debug.LogWarning("warning missing method Replace"); 
             args = new Type[]{typeof(System.String), typeof(System.String)};
             method = type.GetMethod("Replace", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Replace_92);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Replace_92); else UnityEngine.Debug.LogWarning("warning missing method Replace"); 
             args = new Type[]{typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("Remove", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Remove_93);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Remove_93); else UnityEngine.Debug.LogWarning("warning missing method Remove"); 
             args = new Type[]{typeof(System.Int32)};
             method = type.GetMethod("Remove", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Remove_94);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Remove_94); else UnityEngine.Debug.LogWarning("warning missing method Remove"); 
             args = new Type[]{typeof(System.String), typeof(System.Object)};
             method = type.GetMethod("Format", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Format_95);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Format_95); else UnityEngine.Debug.LogWarning("warning missing method Format"); 
             args = new Type[]{typeof(System.String), typeof(System.Object), typeof(System.Object)};
             method = type.GetMethod("Format", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Format_96);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Format_96); else UnityEngine.Debug.LogWarning("warning missing method Format"); 
             args = new Type[]{typeof(System.String), typeof(System.Object), typeof(System.Object), typeof(System.Object)};
             method = type.GetMethod("Format", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Format_97);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Format_97); else UnityEngine.Debug.LogWarning("warning missing method Format"); 
             args = new Type[]{typeof(System.String), typeof(System.Object[])};
             method = type.GetMethod("Format", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Format_98);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Format_98); else UnityEngine.Debug.LogWarning("warning missing method Format"); 
             args = new Type[]{typeof(System.IFormatProvider), typeof(System.String), typeof(System.Object[])};
             method = type.GetMethod("Format", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Format_99);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Format_99); else UnityEngine.Debug.LogWarning("warning missing method Format"); 
             args = new Type[]{typeof(System.String)};
             method = type.GetMethod("Copy", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Copy_100);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Copy_100); else UnityEngine.Debug.LogWarning("warning missing method Copy"); 
             args = new Type[]{typeof(System.Object)};
             method = type.GetMethod("Concat", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Concat_101);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Concat_101); else UnityEngine.Debug.LogWarning("warning missing method Concat"); 
             args = new Type[]{typeof(System.Object), typeof(System.Object)};
             method = type.GetMethod("Concat", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Concat_102);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Concat_102); else UnityEngine.Debug.LogWarning("warning missing method Concat"); 
             args = new Type[]{typeof(System.Object), typeof(System.Object), typeof(System.Object)};
             method = type.GetMethod("Concat", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Concat_103);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Concat_103); else UnityEngine.Debug.LogWarning("warning missing method Concat"); 
             args = new Type[]{typeof(System.Object), typeof(System.Object), typeof(System.Object), typeof(System.Object)};
             method = type.GetMethod("Concat", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Concat_104);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Concat_104); else UnityEngine.Debug.LogWarning("warning missing method Concat"); 
             args = new Type[]{typeof(System.Object[])};
             method = type.GetMethod("Concat", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Concat_105);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Concat_105); else UnityEngine.Debug.LogWarning("warning missing method Concat"); 
             args = new Type[]{typeof(System.String), typeof(System.String)};
             method = type.GetMethod("Concat", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Concat_106);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Concat_106); else UnityEngine.Debug.LogWarning("warning missing method Concat"); 
             args = new Type[]{typeof(System.String), typeof(System.String), typeof(System.String)};
             method = type.GetMethod("Concat", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Concat_107);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Concat_107); else UnityEngine.Debug.LogWarning("warning missing method Concat"); 
             args = new Type[]{typeof(System.String), typeof(System.String), typeof(System.String), typeof(System.String)};
             method = type.GetMethod("Concat", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Concat_108);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Concat_108); else UnityEngine.Debug.LogWarning("warning missing method Concat"); 
             args = new Type[]{typeof(System.String[])};
             method = type.GetMethod("Concat", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Concat_109);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Concat_109); else UnityEngine.Debug.LogWarning("warning missing method Concat"); 
             args = new Type[]{typeof(System.String)};
             method = type.GetMethod("Intern", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Intern_110);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Intern_110); else UnityEngine.Debug.LogWarning("warning missing method Intern"); 
             args = new Type[]{typeof(System.String)};
             method = type.GetMethod("IsInterned", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, IsInterned_111);
+            if (method != null) app.RegisterCLRMethodRedirection(method, IsInterned_111); else UnityEngine.Debug.LogWarning("warning missing method IsInterned"); 
             args = new Type[]{};
             method = type.GetMethod("GetTypeCode", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetTypeCode_112);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetTypeCode_112); else UnityEngine.Debug.LogWarning("warning missing method GetTypeCode"); 
             args = new Type[]{};
             method = type.GetMethod("GetEnumerator", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, GetEnumerator_113);
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetEnumerator_113); else UnityEngine.Debug.LogWarning("warning missing method GetEnumerator"); 
+
+            field = type.GetField("Empty", flag);
+            if (field != null) app.RegisterCLRFieldGetter(field, get_Empty_0); else UnityEngine.Debug.LogWarning("warning missing field Empty");
+
+            app.RegisterCLRCreateArrayInstance(type, s => new System.String[s]);
 
             args = new Type[]{typeof(System.Char[]), typeof(System.Int32), typeof(System.Int32)};
             method = type.GetConstructor(flag, null, args, null);
@@ -390,7 +397,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Join(separator, value);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Join_1(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -411,7 +418,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Join(separator, value, startIndex, count);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Equals_2(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -611,7 +618,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.ToCharArray();
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* ToCharArray_12(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -630,7 +637,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.ToCharArray(startIndex, length);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* IsNullOrEmpty_13(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -698,7 +705,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.Split(separator);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Split_17(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -718,7 +725,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.Split(separator, count);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Split_18(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -739,7 +746,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.Split(separator, options);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Split_19(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -762,7 +769,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.Split(separator, count, options);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Split_20(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -783,7 +790,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.Split(separator, options);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Split_21(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -806,7 +813,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.Split(separator, count, options);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Substring_22(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -823,7 +830,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.Substring(startIndex);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Substring_23(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -842,7 +849,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.Substring(startIndex, length);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Trim_24(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -860,7 +867,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.Trim(trimChars);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* TrimStart_25(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -878,7 +885,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.TrimStart(trimChars);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* TrimEnd_26(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -896,7 +903,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.TrimEnd(trimChars);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* IsNormalized_27(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -948,7 +955,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.Normalize();
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Normalize_30(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -966,7 +973,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.Normalize(normalizationForm);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Compare_31(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -1947,7 +1954,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.PadLeft(totalWidth);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* PadLeft_74(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -1966,7 +1973,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.PadLeft(totalWidth, paddingChar);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* PadRight_75(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -1983,7 +1990,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.PadRight(totalWidth);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* PadRight_76(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2002,7 +2009,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.PadRight(totalWidth, paddingChar);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* StartsWith_77(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2085,7 +2092,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.ToLower();
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* ToLower_81(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2103,7 +2110,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.ToLower(culture);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* ToLowerInvariant_82(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2118,7 +2125,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.ToLowerInvariant();
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* ToUpper_83(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2133,7 +2140,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.ToUpper();
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* ToUpper_84(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2151,7 +2158,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.ToUpper(culture);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* ToUpperInvariant_85(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2166,7 +2173,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.ToUpperInvariant();
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* ToString_86(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2181,7 +2188,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.ToString();
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* ToString_87(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2199,7 +2206,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.ToString(provider);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Clone_88(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2217,9 +2224,9 @@ namespace ILRuntime.Runtime.Generated
             object obj_result_of_this_method = result_of_this_method;
             if(obj_result_of_this_method is CrossBindingAdaptorType)
             {    
-                return ILIntepreter.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
+                return StackObject.PushObject(__ret, __mStack, ((CrossBindingAdaptorType)obj_result_of_this_method).ILInstance);
             }
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Trim_89(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2234,7 +2241,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.Trim();
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Insert_90(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2254,7 +2261,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.Insert(startIndex, value);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Replace_91(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2273,7 +2280,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.Replace(oldChar, newChar);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Replace_92(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2294,7 +2301,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.Replace(oldValue, newValue);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Remove_93(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2313,7 +2320,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.Remove(startIndex, count);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Remove_94(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2330,7 +2337,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.Remove(startIndex);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Format_95(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2347,7 +2354,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Format(format, arg0);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Format_96(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2367,7 +2374,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Format(format, arg0, arg1);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Format_97(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2390,7 +2397,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Format(format, arg0, arg1, arg2);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Format_98(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2407,7 +2414,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Format(format, args);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Format_99(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2427,7 +2434,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Format(provider, format, args);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Copy_100(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2441,7 +2448,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Copy(str);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Concat_101(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2455,7 +2462,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Concat(arg0);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Concat_102(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2472,7 +2479,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Concat(arg0, arg1);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Concat_103(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2492,7 +2499,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Concat(arg0, arg1, arg2);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Concat_104(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2515,7 +2522,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Concat(arg0, arg1, arg2, arg3);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Concat_105(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2529,7 +2536,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Concat(args);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Concat_106(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2546,7 +2553,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Concat(str0, str1);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Concat_107(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2566,7 +2573,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Concat(str0, str1, str2);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Concat_108(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2589,7 +2596,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Concat(str0, str1, str2, str3);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Concat_109(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2603,7 +2610,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Concat(values);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Intern_110(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2617,7 +2624,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.Intern(str);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* IsInterned_111(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2631,7 +2638,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = System.String.IsInterned(str);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* GetTypeCode_112(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2646,7 +2653,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.GetTypeCode();
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* GetEnumerator_113(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2661,7 +2668,13 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = instance_of_this_method.GetEnumerator();
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
+        }
+
+
+        static object get_Empty_0(ref object o)
+        {
+            return System.String.Empty;
         }
 
 
@@ -2680,7 +2693,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = new System.String(value, startIndex, length);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Ctor_1(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2694,7 +2707,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = new System.String(value);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
         static StackObject* Ctor_2(ILIntepreter __intp, StackObject* __esp, List<object> __mStack, CLRMethod __method, bool isNewObj)
@@ -2709,7 +2722,7 @@ namespace ILRuntime.Runtime.Generated
 
             var result_of_this_method = new System.String(c, count);
 
-            return ILIntepreter.PushObject(__ret, __mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, __mStack, result_of_this_method);
         }
 
 

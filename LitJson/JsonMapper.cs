@@ -1008,7 +1008,7 @@ namespace LitJson
             var type = method.GenericArguments[0].ReflectionType;
             var result_of_this_method = ReadValue(type, new JsonReader(json));
 
-            return ILIntepreter.PushObject(__ret, mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, mStack, result_of_this_method);
         }
 
         public unsafe static StackObject* JsonToObject2(ILIntepreter intp, StackObject* esp, List<object> mStack, CLRMethod method, bool isNewObj)
@@ -1022,7 +1022,7 @@ namespace LitJson
             var type = method.GenericArguments[0].ReflectionType;
             var result_of_this_method = ReadValue(type, json);
 
-            return ILIntepreter.PushObject(__ret, mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, mStack, result_of_this_method);
         }
 
         public unsafe static StackObject* JsonToObject3(ILIntepreter intp, StackObject* esp, List<object> mStack, CLRMethod method, bool isNewObj)
@@ -1036,7 +1036,7 @@ namespace LitJson
             var type = method.GenericArguments[0].ReflectionType;
             var result_of_this_method = ReadValue(type, new JsonReader(json));
 
-            return ILIntepreter.PushObject(__ret, mStack, result_of_this_method);
+            return StackObject.PushObject(__ret, mStack, result_of_this_method);
         }
     }
 }

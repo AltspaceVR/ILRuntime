@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 using ILRuntime.CLR.TypeSystem;
 using ILRuntime.CLR.Method;
@@ -18,20 +19,32 @@ namespace ILRuntime.Runtime.Generated
         {
             BindingFlags flag = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
             MethodBase method;
+            FieldInfo field;
             Type[] args;
             Type type = typeof(ILRuntimeTest.TestFramework.TestStruct);
             args = new Type[]{typeof(ILRuntimeTest.TestFramework.TestStruct).MakeByRefType()};
             method = type.GetMethod("DoTest", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, DoTest_0);
+            if (method != null) app.RegisterCLRMethodRedirection(method, DoTest_0); else UnityEngine.Debug.LogWarning("warning missing method DoTest"); 
             args = new Type[]{typeof(System.Int32).MakeByRefType()};
             method = type.GetMethod("DoTest", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, DoTest_1);
+            if (method != null) app.RegisterCLRMethodRedirection(method, DoTest_1); else UnityEngine.Debug.LogWarning("warning missing method DoTest"); 
             args = new Type[]{typeof(ILRuntimeTest.TestFramework.TestStruct)};
             method = type.GetMethod("DoTest2", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, DoTest2_2);
+            if (method != null) app.RegisterCLRMethodRedirection(method, DoTest2_2); else UnityEngine.Debug.LogWarning("warning missing method DoTest2"); 
             args = new Type[]{typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("Add", flag, null, args, null);
-            app.RegisterCLRMethodRedirection(method, Add_3);
+            if (method != null) app.RegisterCLRMethodRedirection(method, Add_3); else UnityEngine.Debug.LogWarning("warning missing method Add"); 
+
+            field = type.GetField("value", flag);
+            if (field != null) app.RegisterCLRFieldGetter(field, get_value_0); else UnityEngine.Debug.LogWarning("warning missing field value");
+            if (field != null) app.RegisterCLRFieldSetter(field, set_value_0);
+            field = type.GetField("instance", flag);
+            if (field != null) app.RegisterCLRFieldGetter(field, get_instance_1); else UnityEngine.Debug.LogWarning("warning missing field instance");
+            if (field != null) app.RegisterCLRFieldSetter(field, set_instance_1);
+
+            app.RegisterCLRMemberwiseClone(type, PerformMemberwiseClone);
+            app.RegisterCLRCreateDefaultInstance(type, () => new ILRuntimeTest.TestFramework.TestStruct());
+            app.RegisterCLRCreateArrayInstance(type, s => new ILRuntimeTest.TestFramework.TestStruct[s]);
 
 
         }
@@ -56,7 +69,7 @@ namespace ILRuntime.Runtime.Generated
                         else
                         {
                             var t = __domain.GetType(___obj.GetType()) as CLRType;
-                            t.GetField(ptr_of_this_method->ValueLow).SetValue(___obj, instance_of_this_method);
+                            t.SetFieldValue(ptr_of_this_method->ValueLow, ref ___obj, instance_of_this_method);
                         }
                     }
                     break;
@@ -69,7 +82,7 @@ namespace ILRuntime.Runtime.Generated
                         }
                         else
                         {
-                            ((CLRType)t).GetField(ptr_of_this_method->ValueLow).SetValue(null, instance_of_this_method);
+                            ((CLRType)t).SetStaticFieldValue(ptr_of_this_method->ValueLow, instance_of_this_method);
                         }
                     }
                     break;
@@ -112,7 +125,7 @@ namespace ILRuntime.Runtime.Generated
                         else
                         {
                             var t = __domain.GetType(___obj.GetType()) as CLRType;
-                            t.GetField(ptr_of_this_method->ValueLow).SetValue(___obj, a);
+                            t.SetFieldValue(ptr_of_this_method->ValueLow, ref ___obj, a);
                         }
                     }
                     break;
@@ -125,7 +138,7 @@ namespace ILRuntime.Runtime.Generated
                         }
                         else
                         {
-                            ((CLRType)t).GetField(ptr_of_this_method->ValueLow).SetValue(null, a);
+                            ((CLRType)t).SetStaticFieldValue(ptr_of_this_method->ValueLow, a);
                         }
                     }
                     break;
@@ -171,7 +184,7 @@ namespace ILRuntime.Runtime.Generated
                         else
                         {
                             var t = __domain.GetType(___obj.GetType()) as CLRType;
-                            t.GetField(ptr_of_this_method->ValueLow).SetValue(___obj, a);
+                            t.SetFieldValue(ptr_of_this_method->ValueLow, ref ___obj, a);
                         }
                     }
                     break;
@@ -184,7 +197,7 @@ namespace ILRuntime.Runtime.Generated
                         }
                         else
                         {
-                            ((CLRType)t).GetField(ptr_of_this_method->ValueLow).SetValue(null, a);
+                            ((CLRType)t).SetStaticFieldValue(ptr_of_this_method->ValueLow, a);
                         }
                     }
                     break;
@@ -230,6 +243,34 @@ namespace ILRuntime.Runtime.Generated
             return __ret + 1;
         }
 
+
+        static object get_value_0(ref object o)
+        {
+            return ((ILRuntimeTest.TestFramework.TestStruct)o).value;
+        }
+        static void set_value_0(ref object o, object v)
+        {
+            var h = GCHandle.Alloc(o, GCHandleType.Pinned);
+            ILRuntimeTest.TestFramework.TestStruct* p = (ILRuntimeTest.TestFramework.TestStruct *)(void *)h.AddrOfPinnedObject();
+            p->value = (System.Int32)v;
+            h.Free();
+        }
+        static object get_instance_1(ref object o)
+        {
+            return ILRuntimeTest.TestFramework.TestStruct.instance;
+        }
+        static void set_instance_1(ref object o, object v)
+        {
+            ILRuntimeTest.TestFramework.TestStruct.instance = (ILRuntimeTest.TestFramework.TestStruct)v;
+        }
+
+        static object PerformMemberwiseClone(ref object o)
+        {
+            return new ILRuntimeTest.TestFramework.TestStruct
+            {
+                value = ((ILRuntimeTest.TestFramework.TestStruct) o).value,
+            };
+        }
 
 
     }
