@@ -101,7 +101,7 @@ namespace ILRuntime.Runtime.Intepreter
             StackObject* v1 = frame.LocalVarPointer;
             StackObject* v2 = frame.LocalVarPointer + 1;
             StackObject* v3 = frame.LocalVarPointer + 1 + 1;
-            StackObject* v4 = Add(frame.LocalVarPointer, 3);
+            StackObject* v4 = frame.LocalVarPointer + 1 + 1 + 1;
             int finallyEndAddress = 0;
 
             esp = frame.BasePointer;
@@ -115,16 +115,16 @@ namespace ILRuntime.Runtime.Intepreter
             }
             unhandledException = false;
 
+            var curArg = arg;
             //Managed Stack reserved for arguments(In case of starg)
-            for (int i = 0; i < paramCnt; i++)
+            for (int i = 0; i < paramCnt; i++, curArg = curArg + 1)
             {
-                var a = Add(arg, i);
-                switch (a->ObjectType)
+                switch (curArg->ObjectType)
                 {
                     case ObjectTypes.Null:
                         //Need to reserve place for null, in case of starg
-                        a->ObjectType = ObjectTypes.Object;
-                        a->Value = mStack.Count;
+                        curArg->ObjectType = ObjectTypes.Object;
+                        curArg->Value = mStack.Count;
                         mStack.Add(null);
                         break;
                     case ObjectTypes.Object:
@@ -138,8 +138,10 @@ namespace ILRuntime.Runtime.Intepreter
             stack.PushFrame(ref frame);
 
             int locBase = mStack.Count;
+            var loc = v1;
+
             //Managed Stack reserved for local variable
-            for (int i = 0; i < method.LocalVariableCount; i++)
+            for (int i = 0; i < method.LocalVariableCount; i++, loc = loc + 1)
             {
                 var v = method.Variables[i];
                 if (v.VariableType.IsValueType && !v.VariableType.IsPrimitive)
@@ -148,15 +150,13 @@ namespace ILRuntime.Runtime.Intepreter
                     if (t is ILType)
                     {
                         var obj = ((ILType)t).Instantiate(false);
-                        var loc = Add(v1, i);
                         loc->ObjectType = ObjectTypes.Object;
                         loc->Value = mStack.Count;
                         mStack.Add(obj);
                     }
                     else
                     {
-                        var loc = Add(v1, i);
-                        StackObject.PointToNewValueTypeValue(loc, mStack, (CLRType)t);
+                        StackObject.PointToNewValueTypeValue(loc, this, mStack, (CLRType)t);
                     }
                 }
                 else
@@ -164,12 +164,10 @@ namespace ILRuntime.Runtime.Intepreter
                     if (v.VariableType.IsPrimitive)
                     {
                         var t = AppDomain.GetType(v.VariableType, method.DeclearingType, method);
-                        var loc = Add(v1, i);
                         StackObject.Initialized(loc, t.TypeForCLR);
                     }
                     else
                     {
-                        var loc = Add(v1, i);
                         loc->ObjectType = ObjectTypes.Object;
                         loc->Value = mStack.Count;
                     }
@@ -4292,6 +4290,15 @@ namespace ILRuntime.Runtime.Intepreter
             esp->Value = -1;
             esp->ValueLow = 0;
 #endif
+        }
+
+        // Re-points this stack value pointer to free memory for use before writing a new value type value
+        //
+        // Each stack object is pre-allocated a block of memory for value types, and this resets ValuePtr
+        // to point to that memory.
+        public void ResetValuePtr(StackObject* esp)
+        {
+            esp->ValuePtr = stack.stackValueMemoryBase + (esp - stack.stackMemoryBase) * stack.stackValueMemorySlotSize;
         }
     }
 }

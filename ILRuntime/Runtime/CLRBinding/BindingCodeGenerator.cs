@@ -415,6 +415,35 @@ namespace ILRuntime.Runtime.Generated
             return sb.ToString();
         }
 
+        private static string GetPointerArithmeticForNegativeOffset(string var, int offset)
+        {
+            switch (offset)
+            {
+                case 0:
+                    return var;
+                case 1:
+                    return var + " - 1";
+                case 2:
+                    return var + " - 1 - 1";
+                case 3:
+                    return var + " - 1 - 1 - 1";
+                case 4:
+                    return var + " - 1 - 1 - 1 - 1";
+                case 5:
+                    return var + " - 1 - 1 - 1 - 1 - 1";
+                case 6:
+                    return var + " - 1 - 1 - 1 - 1 - 1 - 1";
+                case 7:
+                    return var + " - 1 - 1 - 1 - 1 - 1 - 1 - 1";
+                case 8:
+                    return var + " - 1 - 1 - 1 - 1 - 1 - 1 - 1 - 1";
+                case 9:
+                    return var + " - 1 - 1 - 1 - 1 - 1 - 1 - 1 - 1 - 1";
+                default:
+                    return string.Format("ILIntepreter.Minus({0},{1})", var, offset);
+            }
+        }
+
         static string GenerateConstructorWraperCode(Type type, ConstructorInfo[] methods, string typeClsName, HashSet<MethodBase> excludes)
         {
             StringBuilder sb = new StringBuilder();
@@ -432,11 +461,11 @@ namespace ILRuntime.Runtime.Generated
                 sb.AppendLine("        {");
                 sb.AppendLine("            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;");
                 sb.AppendLine("            StackObject* ptr_of_this_method;");
-                sb.AppendLine(string.Format("            StackObject* __ret = ILIntepreter.Minus(__esp, {0});", paramCnt));
+                sb.AppendLine(string.Format("            StackObject* __ret = {0};", GetPointerArithmeticForNegativeOffset("__esp", paramCnt)));
                 for (int j = param.Length; j > 0; j--)
                 {
                     var p = param[j - 1];
-                    sb.AppendLine(string.Format("            ptr_of_this_method = ILIntepreter.Minus(__esp, {0});", param.Length - j + 1));
+                    sb.AppendLine(string.Format("            ptr_of_this_method = {0};", GetPointerArithmeticForNegativeOffset("__esp", param.Length - j + 1)));
                     string tmp, clsName;
                     bool isByRef;
                     p.ParameterType.GetClassName(out tmp, out clsName, out isByRef);
@@ -477,7 +506,7 @@ namespace ILRuntime.Runtime.Generated
                     string tmp, clsName;
                     bool isByRef;
                     p.ParameterType.GetElementType().GetClassName(out tmp, out clsName, out isByRef);
-                    sb.AppendLine(string.Format("            ptr_of_this_method = ILIntepreter.Minus(__esp, {0});", param.Length - j + 1));
+                    sb.AppendLine(string.Format("            ptr_of_this_method = {0};", GetPointerArithmeticForNegativeOffset("__esp", param.Length - j + 1)));
                     sb.AppendLine(@"            switch(ptr_of_this_method->ObjectType)
             {
                 case ObjectTypes.StackObjectReference:
@@ -564,11 +593,11 @@ namespace ILRuntime.Runtime.Generated
                 sb.AppendLine("        {");
                 sb.AppendLine("            ILRuntime.Runtime.Enviorment.AppDomain __domain = __intp.AppDomain;");
                 sb.AppendLine("            StackObject* ptr_of_this_method;");
-                sb.AppendLine(string.Format("            StackObject* __ret = ILIntepreter.Minus(__esp, {0});", paramCnt));
+                sb.AppendLine(string.Format("            StackObject* __ret = {0};", GetPointerArithmeticForNegativeOffset("__esp", paramCnt)));
                 for (int j = param.Length; j > 0; j--)
                 {
                     var p = param[j - 1];
-                    sb.AppendLine(string.Format("            ptr_of_this_method = ILIntepreter.Minus(__esp, {0});", param.Length - j + 1));
+                    sb.AppendLine(string.Format("            ptr_of_this_method = {0};", GetPointerArithmeticForNegativeOffset("__esp", param.Length - j + 1)));
                     string tmp, clsName;
                     bool isByRef;
                     p.ParameterType.GetClassName(out tmp, out clsName, out isByRef);
@@ -580,7 +609,7 @@ namespace ILRuntime.Runtime.Generated
                 }
                 if (!i.IsStatic)
                 {
-                    sb.AppendLine(string.Format("            ptr_of_this_method = ILIntepreter.Minus(__esp, {0});", paramCnt));
+                    sb.AppendLine(string.Format("            ptr_of_this_method = {0};", GetPointerArithmeticForNegativeOffset("__esp", paramCnt)));
                     if (type.IsPrimitive)
                         sb.AppendLine(string.Format("            {0} instance_of_this_method = GetInstance(__domain, ptr_of_this_method, __mStack);", typeClsName));
                     else
@@ -741,7 +770,7 @@ namespace ILRuntime.Runtime.Generated
                     string tmp, clsName;
                     bool isByRef;
                     p.ParameterType.GetElementType().GetClassName(out tmp, out clsName, out isByRef);
-                    sb.AppendLine(string.Format("            ptr_of_this_method = ILIntepreter.Minus(__esp, {0});", param.Length - j + 1));
+                    sb.AppendLine(string.Format("            ptr_of_this_method = {0};", GetPointerArithmeticForNegativeOffset("__esp", param.Length - j + 1)));
                     sb.AppendLine(@"            switch(ptr_of_this_method->ObjectType)
             {
                 case ObjectTypes.StackObjectReference:

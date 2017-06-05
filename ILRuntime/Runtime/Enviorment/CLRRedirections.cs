@@ -96,12 +96,12 @@ namespace ILRuntime.Runtime.Enviorment
 
         public static StackObject* TypeEquals(ILIntepreter intp, StackObject* esp, List<object> mStack, CLRMethod method, bool isNewObj)
         {
-            var ret = ILIntepreter.Minus(esp, 2);
+            var ret = esp - 1 - 1;
             var p = esp - 1;
             AppDomain dommain = intp.AppDomain;
             var other = StackObject.ToObject(p, dommain, mStack);
             intp.Free(p);
-            p = ILIntepreter.Minus(esp, 2);
+            p = esp - 1 - 1;
             var instance = StackObject.ToObject(p, dommain, mStack);
             intp.Free(p);
             if(instance is ILRuntimeType)
@@ -762,7 +762,7 @@ namespace ILRuntime.Runtime.Enviorment
         {
             AppDomain domain = intp.AppDomain;
             //Don't ask me why not esp - 3, unity won't return the right result
-            var ret = ILIntepreter.Minus(esp, 3);
+            var ret = esp - 1 - 1 - 1;
             var param = esp - 1;
             var p = StackObject.ToObject(param, domain, mStack);
             intp.Free(param);
@@ -771,7 +771,7 @@ namespace ILRuntime.Runtime.Enviorment
             var obj = StackObject.ToObject(param, domain, mStack);
             intp.Free(param);
 
-            param = ILIntepreter.Minus(esp, 3);
+            param = esp - 1 - 1 - 1;
             object instance = StackObject.ToObject(param, domain, mStack);
             intp.Free(param);
 

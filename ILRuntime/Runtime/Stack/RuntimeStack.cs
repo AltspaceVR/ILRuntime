@@ -11,10 +11,15 @@ namespace ILRuntime.Runtime.Stack
     unsafe class RuntimeStack : IDisposable
     {
         ILIntepreter intepreter;
-        StackObject* pointer;
         StackObject* endOfMemory;
-        IntPtr nativePointer;
-        IntPtr nativeValuesPointer;
+
+        IntPtr stackMemoryBasePointer;
+        IntPtr stackValueMemoryBasePointer;
+
+        public StackObject* stackMemoryBase;
+        public byte* stackValueMemoryBase;
+        public int stackValueMemorySlotSize;
+
         List<object> managedStack = new List<object>(32);
         Stack<StackFrame> frames = new Stack<StackFrame>();
         const int MAXIMAL_STACK_OBJECTS = 1024 * 16;
@@ -24,22 +29,14 @@ namespace ILRuntime.Runtime.Stack
         {
             this.intepreter = intepreter;
 
-            nativePointer = System.Runtime.InteropServices.Marshal.AllocHGlobal(sizeof(StackObject) * MAXIMAL_STACK_OBJECTS);
-            nativeValuesPointer = System.Runtime.InteropServices.Marshal.AllocHGlobal(sizeof(StackValueObject) * MAXIMAL_STACK_OBJECTS);
+            stackValueMemorySlotSize = sizeof (StackValueObject);
+            stackMemoryBasePointer = System.Runtime.InteropServices.Marshal.AllocHGlobal(sizeof(StackObject) * MAXIMAL_STACK_OBJECTS);
+            stackValueMemoryBasePointer = System.Runtime.InteropServices.Marshal.AllocHGlobal(stackValueMemorySlotSize * MAXIMAL_STACK_OBJECTS);
 
-            pointer = (StackObject*)nativePointer.ToPointer();
+            stackMemoryBase = (StackObject*)stackMemoryBasePointer.ToPointer();
+            stackValueMemoryBase = (byte *)stackValueMemoryBasePointer.ToInt64();
 
-            var po = pointer;
-            var pv = (StackValueObject *)nativeValuesPointer.ToPointer();
-
-            endOfMemory = Add(pointer, MAXIMAL_STACK_OBJECTS);
-
-            while (po != endOfMemory)
-            {
-                po->ValuePtr = pv;
-                po++;
-                pv++;
-            }
+            endOfMemory = Add(stackMemoryBase, MAXIMAL_STACK_OBJECTS);
         }
 
         ~RuntimeStack()
@@ -51,7 +48,7 @@ namespace ILRuntime.Runtime.Stack
         {
             get
             {
-                return pointer;
+                return stackMemoryBase;
             }
         }
 
@@ -59,7 +56,7 @@ namespace ILRuntime.Runtime.Stack
 
         public void InitializeFrame(ILMethod method, StackObject* esp, out StackFrame res)
         {
-            if (esp < pointer || esp >= endOfMemory)
+            if (esp < stackMemoryBase || esp >= endOfMemory)
                 throw new StackOverflowException();
             if (frames.Count > 0 && frames.Peek().BasePointer > esp)
                 throw new StackOverflowException();
@@ -113,13 +110,13 @@ namespace ILRuntime.Runtime.Stack
         
         public void Dispose()
         {
-            if (nativePointer != IntPtr.Zero)
+            if (stackMemoryBasePointer != IntPtr.Zero)
             {
-                System.Runtime.InteropServices.Marshal.FreeHGlobal(nativePointer);
-                System.Runtime.InteropServices.Marshal.FreeHGlobal(nativeValuesPointer);
+                System.Runtime.InteropServices.Marshal.FreeHGlobal(stackMemoryBasePointer);
+                System.Runtime.InteropServices.Marshal.FreeHGlobal(stackValueMemoryBasePointer);
 
-                nativePointer = IntPtr.Zero;
-                nativeValuesPointer = IntPtr.Zero;
+                stackMemoryBasePointer = IntPtr.Zero;
+                stackValueMemoryBasePointer = IntPtr.Zero;
             }
         }
 

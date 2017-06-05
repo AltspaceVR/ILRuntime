@@ -38,17 +38,19 @@ namespace ILRuntime.Runtime.Stack
             return i >= 128 && i <= 1023;
         }
 
-        public static unsafe void PointToNewValueTypeValue(StackObject *loc, List<object> mStack, CLRType t)
+        public static unsafe void PointToNewValueTypeValue(StackObject *loc, ILIntepreter interpreter, List<object> mStack, CLRType t)
         {
             if (t.TypeForCLR == typeof (Vector3))
             {
                 loc->ObjectType = (ObjectTypes)128;
+                interpreter.ResetValuePtr(loc);
                 ((StackValueObject *)loc->ValuePtr)->ValueVector3 = default(Vector3);
                 mStack.Add(null);
             }
             else if (t.TypeForCLR == typeof (Quaternion))
             {
                 loc->ObjectType = (ObjectTypes)129;
+                interpreter.ResetValuePtr(loc);
                 ((StackValueObject *)loc->ValuePtr)->ValueQuaternion = default(Quaternion);
                 mStack.Add(null);
             }
@@ -226,16 +228,18 @@ namespace ILRuntime.Runtime.Stack
             }
         }
 
-        public static unsafe StackObject* PushVector3(StackObject* esp, Vector3 obj)
+        public static unsafe StackObject* PushVector3(StackObject* esp, ILIntepreter intepreter, Vector3 obj)
         {
             esp->ObjectType = (ObjectTypes)128;
+            intepreter.ResetValuePtr(esp);
             ((StackValueObject *)esp->ValuePtr)->ValueVector3 = obj;
             return esp + 1;
         }
 
-        public static unsafe StackObject* PushQuaternion(StackObject* esp, Quaternion obj)
+        public static unsafe StackObject* PushQuaternion(StackObject* esp, ILIntepreter intepreter, Quaternion obj)
         {
             esp->ObjectType = (ObjectTypes)129;
+            intepreter.ResetValuePtr(esp);
             ((StackValueObject *)esp->ValuePtr)->ValueQuaternion = obj;
             return esp + 1;
         }
