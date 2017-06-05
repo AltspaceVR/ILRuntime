@@ -38,7 +38,7 @@ namespace ILRuntime.Runtime.Stack
             return i >= 128 && i <= 1023;
         }
 
-        public static unsafe void PointToNewValueTypeValue(StackObject *loc, ILIntepreter interpreter, List<object> mStack, CLRType t)
+        public static unsafe void PointToNewValueTypeValue(StackObject *loc, ILIntepreter interpreter, IList<object> mStack, CLRType t)
         {
             if (t.TypeForCLR == typeof (Vector3))
             {
@@ -64,7 +64,7 @@ namespace ILRuntime.Runtime.Stack
         }
 
         //IL2CPP can't process esp->ToObject() properly, so I can only use static function for this
-        public static unsafe object ToObject(StackObject* esp, AppDomain appdomain, List<object> mStack)
+        public static unsafe object ToObject(StackObject* esp, AppDomain appdomain, IList<object> mStack)
         {
             switch (esp->ObjectType)
             {
@@ -139,7 +139,7 @@ namespace ILRuntime.Runtime.Stack
             }
         }
 
-        public unsafe static void Initialized(ref StackObject esp, int idx, Type t, IType fieldType, List<object> mStack)
+        public unsafe static void Initialized(ref StackObject esp, int idx, Type t, IType fieldType, IList<object> mStack)
         {
             if (t.IsPrimitive)
             {
@@ -244,7 +244,7 @@ namespace ILRuntime.Runtime.Stack
             return esp + 1;
         }
 
-        public static unsafe void PushCustomValueTypeFromField(AppDomain appDomain, StackObject* stackObject, StackObject* objRef, List<object> mStack, int token)
+        public static unsafe void PushCustomValueTypeFromField(AppDomain appDomain, StackObject* stackObject, StackObject* objRef, IList<object> mStack, int token)
         {
             switch (objRef->ObjectType)
             {
@@ -291,7 +291,7 @@ namespace ILRuntime.Runtime.Stack
             }
         }
 
-        public static unsafe StackObject* PushObject(StackObject* esp, List<object> mStack, object obj, bool isBox = false)
+        public static unsafe StackObject* PushObject(StackObject* esp, IList<object> mStack, object obj, bool isBox = false)
         {
             if (obj != null)
             {
