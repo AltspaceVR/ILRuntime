@@ -2861,7 +2861,7 @@ namespace ILRuntime.Runtime.Intepreter
                                                 }
                                                 else
                                                 {
-#if !DEBUG
+#if !ILRUNTIME_DEBUG
                                                     objRef->ObjectType = ObjectTypes.Null;
                                                     objRef->Value = -1;
                                                     objRef->ValueLow = 0;
@@ -2876,7 +2876,7 @@ namespace ILRuntime.Runtime.Intepreter
                                                 }
                                                 else
                                                 {
-#if !DEBUG
+#if !ILRUNTIME_DEBUG
                                                     objRef->ObjectType = ObjectTypes.Null;
                                                     objRef->Value = -1;
                                                     objRef->ValueLow = 0;
@@ -2886,7 +2886,7 @@ namespace ILRuntime.Runtime.Intepreter
                                         }
                                         else
                                         {
-#if !DEBUG
+#if !ILRUNTIME_DEBUG
                                                 objRef->ObjectType = ObjectTypes.Null;
                                                 objRef->Value = -1;
                                                 objRef->ValueLow = 0;
@@ -4309,9 +4309,11 @@ namespace ILRuntime.Runtime.Intepreter
                     stack.ManagedStack.RemoveAt(esp->Value);
             }
 
+#if ILRUNTIME_DEBUG
             esp->ObjectType = ObjectTypes.Null;
             esp->Value = -1;
             esp->ValueLow = 0;
+#endif
         }
     }
 }
