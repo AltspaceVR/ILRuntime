@@ -225,6 +225,31 @@ namespace ILRuntime.Runtime.Generated
             return sb.ToString();
         }
 
+        static string GenerateFieldRegisterCode(Type type, FieldInfo[] fields, HashSet<FieldInfo> excludes)
+        {
+            StringBuilder sb = new StringBuilder();
+            int idx = 0;
+            foreach (var i in fields)
+            {
+                if (excludes != null && excludes.Contains(i))
+                    continue;
+                if (ShouldSkipField(type, i))
+                    continue;
+                if (i.IsSpecialName)
+                    continue;
+
+                sb.AppendLine(string.Format("            field = type.GetField(\"{0}\", flag);", i.Name));
+                sb.AppendLine(string.Format("            app.RegisterCLRFieldGetter(field, get_{0}_{1});", i.Name, idx));
+                if (!i.IsInitOnly && !i.IsLiteral)
+                {
+                    sb.AppendLine(string.Format("            app.RegisterCLRFieldSetter(field, set_{0}_{1});", i.Name, idx));
+                }
+
+                idx++;
+            }
+            return sb.ToString();
+        }
+
         static string GenerateConstructorRegisterCode(Type type, ConstructorInfo[] methods, HashSet<MethodBase> excludes)
         {
             StringBuilder sb = new StringBuilder();

@@ -97,7 +97,7 @@ namespace ILRuntime.Runtime.Stack
                         }
                         else
                         {
-                            CLRType type = (CLRType)t;
+                            CLR.TypeSystem.CLRType type = (CLR.TypeSystem.CLRType)t;
                             return type.GetFieldValue(esp->ValueLow, null);
                         }
                     }
