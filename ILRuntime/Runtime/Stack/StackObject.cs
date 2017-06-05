@@ -255,6 +255,38 @@ namespace ILRuntime.Runtime.Stack
             }
         }
 
+        public static unsafe void PushCustomValueTypeToArray(Array arr, StackObject* val, int index)
+        {
+            if (arr is object[])
+            {
+                switch (val->ObjectType)
+                {
+                    case (ObjectTypes)128:
+                        var _o_128 = ((StackValueObject *)val->ValuePtr)->ValueVector3;
+                        arr.SetValue(_o_128, index);
+                        break;
+                    case (ObjectTypes)129:
+                        var _o_129 = ((StackValueObject *)val->ValuePtr)->ValueQuaternion;
+                        arr.SetValue(_o_129, index);
+                        break;
+                }
+            }
+            else
+            {
+                switch (val->ObjectType)
+                {
+                    case (ObjectTypes)128:
+                        var _o_128 = ((StackValueObject *)val->ValuePtr)->ValueVector3;
+                        ((Vector3[])arr)[index] = _o_128;
+                        break;
+                    case (ObjectTypes)129:
+                        var _o_129 = ((StackValueObject *)val->ValuePtr)->ValueQuaternion;
+                        ((Quaternion[])arr)[index] = _o_129;
+                        break;
+                }
+            }
+        }
+
         public static unsafe StackObject* PushObject(StackObject* esp, List<object> mStack, object obj, bool isBox = false)
         {
             if (obj != null)

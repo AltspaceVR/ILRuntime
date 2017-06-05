@@ -2947,68 +2947,75 @@ namespace ILRuntime.Runtime.Intepreter
                                     var idx = esp - 1 - 1;
                                     var arrRef = esp - 1 - 1 - 1;
                                     Array arr = mStack[arrRef->Value] as Array;
-                                    if (arr is object[])
+                                    if (StackObject.IsCustomValueType(val->ObjectType))
                                     {
-                                        switch (val->ObjectType)
-                                        {
-                                            case ObjectTypes.Null:
-                                                arr.SetValue(null, idx->Value);
-                                                break;
-                                            case ObjectTypes.Object:
-                                                ArraySetValue(arr, mStack[val->Value], idx->Value);
-                                                break;
-                                            case ObjectTypes.Integer:
-                                                arr.SetValue(val->Value, idx->Value);
-                                                break;
-                                            case ObjectTypes.Long:
-                                                arr.SetValue(*(long*)&val->Value, idx->Value);
-                                                break;
-                                            case ObjectTypes.Float:
-                                                arr.SetValue(*(float*)&val->Value, idx->Value);
-                                                break;
-                                            case ObjectTypes.Double:
-                                                arr.SetValue(*(double*)&val->Value, idx->Value);
-                                                break;
-                                            default:
-                                                throw new NotImplementedException();
-                                        }
+                                        StackObject.PushCustomValueTypeToArray(arr, val, idx->Value);
                                     }
                                     else
                                     {
-                                        switch (val->ObjectType)
+                                        if (arr is object[])
                                         {
-                                            case ObjectTypes.Object:
-                                                ArraySetValue(arr, mStack[val->Value], idx->Value);
-                                                break;
-                                            case ObjectTypes.Integer:
-                                                {
-                                                    StoreIntValueToArray(arr, val, idx);
-                                                }
-                                                break;
-                                            case ObjectTypes.Long:
-                                                {
-                                                    if (arr is long[])
+                                            switch (val->ObjectType)
+                                            {
+                                                case ObjectTypes.Null:
+                                                    arr.SetValue(null, idx->Value);
+                                                    break;
+                                                case ObjectTypes.Object:
+                                                    ArraySetValue(arr, mStack[val->Value], idx->Value);
+                                                    break;
+                                                case ObjectTypes.Integer:
+                                                    arr.SetValue(val->Value, idx->Value);
+                                                    break;
+                                                case ObjectTypes.Long:
+                                                    arr.SetValue(*(long*)&val->Value, idx->Value);
+                                                    break;
+                                                case ObjectTypes.Float:
+                                                    arr.SetValue(*(float*)&val->Value, idx->Value);
+                                                    break;
+                                                case ObjectTypes.Double:
+                                                    arr.SetValue(*(double*)&val->Value, idx->Value);
+                                                    break;
+                                                default:
+                                                    throw new NotImplementedException();
+                                            }
+                                        }
+                                        else
+                                        {
+                                            switch (val->ObjectType)
+                                            {
+                                                case ObjectTypes.Object:
+                                                    ArraySetValue(arr, mStack[val->Value], idx->Value);
+                                                    break;
+                                                case ObjectTypes.Integer:
                                                     {
-                                                        ((long[])arr)[idx->Value] = *(long*)&val->Value;
+                                                        StoreIntValueToArray(arr, val, idx);
                                                     }
-                                                    else
+                                                    break;
+                                                case ObjectTypes.Long:
                                                     {
-                                                        ((ulong[])arr)[idx->Value] = *(ulong*)&val->Value;
+                                                        if (arr is long[])
+                                                        {
+                                                            ((long[])arr)[idx->Value] = *(long*)&val->Value;
+                                                        }
+                                                        else
+                                                        {
+                                                            ((ulong[])arr)[idx->Value] = *(ulong*)&val->Value;
+                                                        }
                                                     }
-                                                }
-                                                break;
-                                            case ObjectTypes.Float:
-                                                {
-                                                    ((float[])arr)[idx->Value] = *(float*)&val->Value;
-                                                }
-                                                break;
-                                            case ObjectTypes.Double:
-                                                {
-                                                    ((double[])arr)[idx->Value] = *(double*)&val->Value;
-                                                }
-                                                break;
-                                            default:
-                                                throw new NotImplementedException();
+                                                    break;
+                                                case ObjectTypes.Float:
+                                                    {
+                                                        ((float[])arr)[idx->Value] = *(float*)&val->Value;
+                                                    }
+                                                    break;
+                                                case ObjectTypes.Double:
+                                                    {
+                                                        ((double[])arr)[idx->Value] = *(double*)&val->Value;
+                                                    }
+                                                    break;
+                                                default:
+                                                    throw new NotImplementedException();
+                                            }
                                         }
                                     }
                                     Free(esp - 1);
