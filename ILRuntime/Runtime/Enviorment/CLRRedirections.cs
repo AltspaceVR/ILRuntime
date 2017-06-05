@@ -23,10 +23,10 @@ namespace ILRuntime.Runtime.Enviorment
                 var t = genericArguments[0];
                 if (t is ILType)
                 {
-                    return ILIntepreter.PushObject(esp, mStack, ((ILType)t).Instantiate());
+                    return StackObject.PushObject(esp, mStack, ((ILType)t).Instantiate());
                 }
                 else
-                    return ILIntepreter.PushObject(esp, mStack, ((CLRType)t).CreateDefaultInstance());
+                    return StackObject.PushObject(esp, mStack, ((CLRType)t).CreateDefaultInstance());
             }
             else
                 throw new EntryPointNotFoundException();
@@ -56,10 +56,10 @@ namespace ILRuntime.Runtime.Enviorment
             {
                 if (t is ILRuntimeType)
                 {
-                    return ILIntepreter.PushObject(p, mStack, ((ILRuntimeType)t).ILType.Instantiate());
+                    return StackObject.PushObject(p, mStack, ((ILRuntimeType)t).ILType.Instantiate());
                 }
                 else
-                    return ILIntepreter.PushObject(p, mStack, Activator.CreateInstance(t));
+                    return StackObject.PushObject(p, mStack, Activator.CreateInstance(t));
             }
             else
                 return ILIntepreter.PushNull(p);
@@ -89,7 +89,7 @@ namespace ILRuntime.Runtime.Enviorment
             intp.Free(p);
             var t = intp.AppDomain.GetType(fullname);
             if (t != null)
-                return ILIntepreter.PushObject(p, mStack, t.ReflectionType);
+                return StackObject.PushObject(p, mStack, t.ReflectionType);
             else
                 return ILIntepreter.PushNull(p);
         }
@@ -421,7 +421,7 @@ namespace ILRuntime.Runtime.Enviorment
                                 dele2 = ((IDelegateAdapter)dele2).Clone();
                             }
                             dele.Combine((IDelegateAdapter)dele2);
-                            return ILIntepreter.PushObject(ret, mStack, dele);
+                            return StackObject.PushObject(ret, mStack, dele);
                         }
                         else
                         {
@@ -430,22 +430,22 @@ namespace ILRuntime.Runtime.Enviorment
                                 dele1 = ((IDelegateAdapter)dele1).Clone();
                             }
                             ((IDelegateAdapter)dele1).Combine((Delegate)dele2);
-                            return ILIntepreter.PushObject(ret, mStack, dele1);
+                            return StackObject.PushObject(ret, mStack, dele1);
                         }
                     }
                     else
                     {
                         if (dele2 is IDelegateAdapter)
-                            return ILIntepreter.PushObject(ret, mStack, Delegate.Combine((Delegate)dele1, ((IDelegateAdapter)dele2).GetConvertor(dele1.GetType())));
+                            return StackObject.PushObject(ret, mStack, Delegate.Combine((Delegate)dele1, ((IDelegateAdapter)dele2).GetConvertor(dele1.GetType())));
                         else
-                            return ILIntepreter.PushObject(ret, mStack, Delegate.Combine((Delegate)dele1, (Delegate)dele2));
+                            return StackObject.PushObject(ret, mStack, Delegate.Combine((Delegate)dele1, (Delegate)dele2));
                     }
                 }
                 else
-                    return ILIntepreter.PushObject(ret, mStack, dele1);
+                    return StackObject.PushObject(ret, mStack, dele1);
             }
             else
-                return ILIntepreter.PushObject(ret, mStack, dele2);
+                return StackObject.PushObject(ret, mStack, dele2);
         }
 
         /*public unsafe static object DelegateCombine(ILContext ctx, object instance, object[] param, IType[] genericArguments)
@@ -518,24 +518,24 @@ namespace ILRuntime.Runtime.Enviorment
                         if (dele2 is IDelegateAdapter)
                         {
                             if (((IDelegateAdapter)dele1).Equals((IDelegateAdapter)dele2))
-                                return ILIntepreter.PushObject(ret, mStack, ((IDelegateAdapter)dele1).Next);
+                                return StackObject.PushObject(ret, mStack, ((IDelegateAdapter)dele1).Next);
                             else
                                 ((IDelegateAdapter)dele1).Remove((IDelegateAdapter)dele2);
                         }
                         else
                             ((IDelegateAdapter)dele1).Remove((Delegate)dele2);
-                        return ILIntepreter.PushObject(ret, mStack, dele1);
+                        return StackObject.PushObject(ret, mStack, dele1);
                     }
                     else
                     {
                         if (dele2 is IDelegateAdapter)
-                            return ILIntepreter.PushObject(ret, mStack, Delegate.Remove((Delegate)dele1, ((IDelegateAdapter)dele2).GetConvertor(dele1.GetType())));
+                            return StackObject.PushObject(ret, mStack, Delegate.Remove((Delegate)dele1, ((IDelegateAdapter)dele2).GetConvertor(dele1.GetType())));
                         else
-                            return ILIntepreter.PushObject(ret, mStack, Delegate.Remove((Delegate)dele1, (Delegate)dele2));
+                            return StackObject.PushObject(ret, mStack, Delegate.Remove((Delegate)dele1, (Delegate)dele2));
                     }
                 }
                 else
-                    return ILIntepreter.PushObject(ret, mStack, dele1);
+                    return StackObject.PushObject(ret, mStack, dele1);
             }
             else
                 return ILIntepreter.PushNull(ret);
@@ -778,7 +778,7 @@ namespace ILRuntime.Runtime.Enviorment
             if (instance is ILRuntimeMethodInfo)
             {
                 if (obj != null)
-                    esp = ILIntepreter.PushObject(ret, mStack, obj);
+                    esp = StackObject.PushObject(ret, mStack, obj);
                 else
                     esp = ret;
                 if (p != null)
@@ -786,7 +786,7 @@ namespace ILRuntime.Runtime.Enviorment
                     object[] arr = (object[])p;
                     foreach (var i in arr)
                     {
-                        esp = ILIntepreter.PushObject(esp, mStack, i);
+                        esp = StackObject.PushObject(esp, mStack, i);
                     }
                 }
                 bool unhandled;
@@ -794,7 +794,7 @@ namespace ILRuntime.Runtime.Enviorment
                 return intp.Execute(ilmethod, esp, out unhandled);
             }
             else
-                return ILIntepreter.PushObject(ret, mStack, ((MethodInfo)instance).Invoke(obj, (object[])p));
+                return StackObject.PushObject(ret, mStack, ((MethodInfo)instance).Invoke(obj, (object[])p));
         }
 
         /*public unsafe static object MethodInfoInvoke(ILContext ctx, object instance, object[] param, IType[] genericArguments)
@@ -845,10 +845,10 @@ namespace ILRuntime.Runtime.Enviorment
             var type = instance.GetType();
             if (type == typeof(ILTypeInstance))
             {
-                return ILIntepreter.PushObject(ret, mStack, ((ILTypeInstance)instance).Type.ReflectionType);
+                return StackObject.PushObject(ret, mStack, ((ILTypeInstance)instance).Type.ReflectionType);
             }
             else
-                return ILIntepreter.PushObject(ret, mStack, type);
+                return StackObject.PushObject(ret, mStack, type);
         }
 
         /*public unsafe static object ObjectGetType(ILContext ctx, object instance, object[] param, IType[] genericArguments)
