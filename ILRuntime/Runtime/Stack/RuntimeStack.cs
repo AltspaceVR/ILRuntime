@@ -14,6 +14,7 @@ namespace ILRuntime.Runtime.Stack
         StackObject* pointer;
         StackObject* endOfMemory;
         IntPtr nativePointer;
+        IntPtr nativeValuesPointer;
         List<object> managedStack = new List<object>(32);
         Stack<StackFrame> frames = new Stack<StackFrame>();
         const int MAXIMAL_STACK_OBJECTS = 1024 * 16;
@@ -24,8 +25,21 @@ namespace ILRuntime.Runtime.Stack
             this.intepreter = intepreter;
 
             nativePointer = System.Runtime.InteropServices.Marshal.AllocHGlobal(sizeof(StackObject) * MAXIMAL_STACK_OBJECTS);
+            nativeValuesPointer = System.Runtime.InteropServices.Marshal.AllocHGlobal(sizeof(StackValueObject) * MAXIMAL_STACK_OBJECTS);
+
             pointer = (StackObject*)nativePointer.ToPointer();
+
+            var po = pointer;
+            var pv = (StackValueObject *)nativeValuesPointer.ToPointer();
+
             endOfMemory = Add(pointer, MAXIMAL_STACK_OBJECTS);
+
+            while (po != endOfMemory)
+            {
+                po->ValuePtr = pv;
+                po++;
+                pv++;
+            }
         }
 
         ~RuntimeStack()
@@ -102,7 +116,10 @@ namespace ILRuntime.Runtime.Stack
             if (nativePointer != IntPtr.Zero)
             {
                 System.Runtime.InteropServices.Marshal.FreeHGlobal(nativePointer);
+                System.Runtime.InteropServices.Marshal.FreeHGlobal(nativeValuesPointer);
+
                 nativePointer = IntPtr.Zero;
+                nativeValuesPointer = IntPtr.Zero;
             }
         }
 

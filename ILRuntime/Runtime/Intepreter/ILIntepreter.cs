@@ -1852,47 +1852,40 @@ namespace ILRuntime.Runtime.Intepreter
                                     StackObject* objRef = GetObjectAndResolveReference(esp - 1);
                                     var token = ip->TokenInteger;
 
-                                    switch (objRef->ObjectType)
+                                    if (StackObject.IsCustomValueType(objRef->ObjectType))
                                     {
-                                        case ObjectTypes.Vector3:
-                                            var _vector3 = objRef->ValueVector3;
-                                            Free(esp - 1);
-                                            StackObject.PushObject(esp - 1, mStack, ((CLRType) AppDomain.GetType(typeof(Vector3))).GetFieldValue(token, _vector3));
-                                            break;
-                                        case ObjectTypes.Quaternion:
-                                            var _q = objRef->ValueQuaternion;
-                                            Free(esp - 1);
-                                            StackObject.PushObject(esp - 1, mStack, ((CLRType) AppDomain.GetType(typeof(Vector3))).GetFieldValue(token, _q));
-                                            break;
-                                        default:
-                                            object obj = RetriveObject(objRef, mStack);
-                                            Free(esp - 1);
-                                            if (obj != null)
+                                        Free(esp - 1);
+                                        StackObject.PushCustomValueTypeFromField(AppDomain, esp - 1, objRef, mStack, token);
+                                    }
+                                    else
+                                    {
+                                        object obj = RetriveObject(objRef, mStack);
+                                        Free(esp - 1);
+                                        if (obj != null)
+                                        {
+                                            if (obj is ILTypeInstance)
                                             {
-                                                if (obj is ILTypeInstance)
-                                                {
-                                                    ILTypeInstance instance = obj as ILTypeInstance;
-                                                    instance.PushToStack(ip->TokenInteger, esp - 1, AppDomain, mStack);
-                                                }
-                                                else
-                                                {
-                                                    var t = obj.GetType();
-                                                    var type = AppDomain.GetType(t);
-                                                    if (type != null)
-                                                    {
-                                                        var ft = ((CLRType)type).GetField(token);
-                                                        var val = ((CLRType)type).GetFieldValue(token, obj);
-                                                        if (val is CrossBindingAdaptorType)
-                                                            val = ((CrossBindingAdaptorType)val).ILInstance;
-                                                        StackObject.PushObject(esp - 1, mStack, val, ft.FieldType == typeof(object));
-                                                    }
-                                                    else
-                                                        throw new TypeLoadException();
-                                                }
+                                                ILTypeInstance instance = obj as ILTypeInstance;
+                                                instance.PushToStack(ip->TokenInteger, esp - 1, AppDomain, mStack);
                                             }
                                             else
-                                                throw new NullReferenceException();
-                                            break;
+                                            {
+                                                var t = obj.GetType();
+                                                var type = AppDomain.GetType(t);
+                                                if (type != null)
+                                                {
+                                                    var ft = ((CLRType)type).GetField(token);
+                                                    var val = ((CLRType)type).GetFieldValue(token, obj);
+                                                    if (val is CrossBindingAdaptorType)
+                                                        val = ((CrossBindingAdaptorType)val).ILInstance;
+                                                    StackObject.PushObject(esp - 1, mStack, val, ft.FieldType == typeof(object));
+                                                }
+                                                else
+                                                    throw new TypeLoadException();
+                                            }
+                                        }
+                                        else
+                                            throw new NullReferenceException();
                                     }
                                 }
                                 break;

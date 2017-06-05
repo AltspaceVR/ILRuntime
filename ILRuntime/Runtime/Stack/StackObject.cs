@@ -14,7 +14,14 @@ using AppDomain = ILRuntime.Runtime.Enviorment.AppDomain;
 namespace ILRuntime.Runtime.Stack
 {
     [StructLayout(LayoutKind.Explicit)]
-    public struct StackObject
+    public struct StackValueObject
+    {
+        [FieldOffset(0)] public Vector3 ValueVector3;
+        [FieldOffset(0)] public Quaternion ValueQuaternion;
+    }
+
+    [StructLayout(LayoutKind.Explicit)]
+    public unsafe struct StackObject
     {
         public static StackObject Null = new StackObject() { ObjectType = ObjectTypes.Null, Value = -1, ValueLow = 0 };
         [FieldOffset(0)] public ObjectTypes ObjectType;
@@ -22,23 +29,27 @@ namespace ILRuntime.Runtime.Stack
         [FieldOffset(4)] public long ValueLong;
         [FieldOffset(4)] public float ValueFloat;
         [FieldOffset(4)] public double ValueDouble;
-        [FieldOffset(4)] public Vector3 ValueVector3;
-        [FieldOffset(4)] public Quaternion ValueQuaternion;
         [FieldOffset(8)] public int ValueLow;
+        [FieldOffset(12)] public void* ValuePtr;
 
+        public static bool IsCustomValueType(ObjectTypes objectType)
+        {
+            var i = (int) objectType;
+            return i >= 128 && i <= 1023;
+        }
 
         public static unsafe void PointToNewValueTypeValue(StackObject *loc, List<object> mStack, CLRType t)
         {
             if (t.TypeForCLR == typeof (Vector3))
             {
-                loc->ObjectType = ObjectTypes.Vector3;
-                loc->ValueVector3 = default(Vector3);
+                loc->ObjectType = (ObjectTypes)128;
+                ((StackValueObject *)loc->ValuePtr)->ValueVector3 = default(Vector3);
                 mStack.Add(null);
             }
             else if (t.TypeForCLR == typeof (Quaternion))
             {
-                loc->ObjectType = ObjectTypes.Quaternion;
-                loc->ValueQuaternion = default(Quaternion);
+                loc->ObjectType = (ObjectTypes)129;
+                ((StackValueObject *)loc->ValuePtr)->ValueQuaternion = default(Quaternion);
                 mStack.Add(null);
             }
             else
@@ -69,10 +80,10 @@ namespace ILRuntime.Runtime.Stack
                     {
                         return esp->ValueDouble;
                     }
-                case ObjectTypes.Vector3:
-                    return esp->ValueVector3;
-                case ObjectTypes.Quaternion:
-                    return esp->ValueQuaternion;
+                case (ObjectTypes)128:
+                    return ((StackValueObject *)esp)->ValueVector3;
+                case (ObjectTypes)129:
+                    return ((StackValueObject *)esp)->ValueQuaternion;
                 case ObjectTypes.Object:
                     return mStack[esp->Value];
                 case ObjectTypes.FieldReference:
@@ -217,16 +228,31 @@ namespace ILRuntime.Runtime.Stack
 
         public static unsafe StackObject* PushVector3(StackObject* esp, Vector3 obj)
         {
-            esp->ObjectType = ObjectTypes.Vector3;
-            esp->ValueVector3 = obj;
+            esp->ObjectType = (ObjectTypes)128;
+            ((StackValueObject *)esp->ValuePtr)->ValueVector3 = obj;
             return esp + 1;
         }
 
         public static unsafe StackObject* PushQuaternion(StackObject* esp, Quaternion obj)
         {
-            esp->ObjectType = ObjectTypes.Quaternion;
-            esp->ValueQuaternion = obj;
+            esp->ObjectType = (ObjectTypes)129;
+            ((StackValueObject *)esp->ValuePtr)->ValueQuaternion = obj;
             return esp + 1;
+        }
+
+        public static unsafe void PushCustomValueTypeFromField(AppDomain appDomain, StackObject* stackObject, StackObject* objRef, List<object> mStack, int token)
+        {
+            switch (objRef->ObjectType)
+            {
+                case (ObjectTypes)128:
+                    var _o_128 = ((StackValueObject *)objRef->ValuePtr)->ValueVector3;
+                    PushObject(stackObject, mStack, ((CLRType) appDomain.GetType(typeof(Vector3))).GetFieldValue(token, _o_128));
+                    break;
+                case (ObjectTypes)129:
+                    var _o_129 = ((StackValueObject *)objRef->ValuePtr)->ValueQuaternion;
+                    PushObject(stackObject, mStack, ((CLRType) appDomain.GetType(typeof(Vector3))).GetFieldValue(token, _o_129));
+                    break;
+            }
         }
 
         public static unsafe StackObject* PushObject(StackObject* esp, List<object> mStack, object obj, bool isBox = false)
@@ -277,9 +303,10 @@ namespace ILRuntime.Runtime.Stack
         Double,
         StackObjectReference,//Value = pointer, 
         StaticFieldReference,
-        Vector3,
-        Quaternion,
-        Object,
+
+        // Custom value types inserted at 128-1023
+
+        Object = 1024,
         FieldReference,//Value = objIdx, ValueLow = fieldIdx
         ArrayReference,//Value = objIdx, ValueLow = elemIdx
     }
