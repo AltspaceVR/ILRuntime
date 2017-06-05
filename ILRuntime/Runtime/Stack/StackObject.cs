@@ -1,23 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 
 using ILRuntime.CLR.TypeSystem;
+using ILRuntime.CLR.Utils;
 using ILRuntime.Runtime.Enviorment;
 using ILRuntime.Runtime.Intepreter;
+using AppDomain = ILRuntime.Runtime.Enviorment.AppDomain;
+
 namespace ILRuntime.Runtime.Stack
 {
-    [System.Runtime.InteropServices.StructLayout(System.Runtime.InteropServices.LayoutKind.Sequential)]
+    [StructLayout(LayoutKind.Explicit)]
     public struct StackObject
     {
         public static StackObject Null = new StackObject() { ObjectType = ObjectTypes.Null, Value = -1, ValueLow = 0 };
-        public ObjectTypes ObjectType;
-        public int Value;
-        public int ValueLow;
+        [FieldOffset(0)] public ObjectTypes ObjectType;
+        [FieldOffset(4)] public int Value;
+        [FieldOffset(4)] public long ValueLong;
+        [FieldOffset(4)] public float ValueFloat;
+        [FieldOffset(4)] public double ValueDouble;
+        [FieldOffset(4)] public DateTime ValueDateTime;
+        [FieldOffset(8)] public int ValueLow;
+
+        public static unsafe void PointToNewValueTypeValue(StackObject *loc, List<object> mStack, CLRType t)
+        {
+            if (t.TypeForCLR == typeof (DateTime))
+            {
+                loc->ObjectType = ObjectTypes.DateTime;
+                loc->ValueDateTime = new DateTime();
+            }
+            else
+            {
+                loc->ObjectType = ObjectTypes.Object;
+                loc->Value = mStack.Count;
+                mStack.Add(t.CreateDefaultInstance());
+            }
+
+        }
 
         //IL2CPP can't process esp->ToObject() properly, so I can only use static function for this
-        public static unsafe object ToObject(StackObject* esp, ILRuntime.Runtime.Enviorment.AppDomain appdomain, List<object> mStack)
+        public static unsafe object ToObject(StackObject* esp, AppDomain appdomain, List<object> mStack)
         {
             switch (esp->ObjectType)
             {
@@ -25,15 +49,15 @@ namespace ILRuntime.Runtime.Stack
                     return esp->Value;
                 case ObjectTypes.Long:
                     {
-                        return *(long*)&esp->Value;
+                        return esp->ValueLong;
                     }
                 case ObjectTypes.Float:
                     {
-                        return *(float*)&esp->Value;
+                        return esp->ValueFloat;
                     }
                 case ObjectTypes.Double:
                     {
-                        return *(double*)&esp->Value;
+                        return esp->ValueDouble;
                     }
                 case ObjectTypes.Object:
                     return mStack[esp->Value];
@@ -66,14 +90,14 @@ namespace ILRuntime.Runtime.Stack
                 case ObjectTypes.StaticFieldReference:
                     {
                         var t = appdomain.GetType(esp->Value);
-                        if (t is CLR.TypeSystem.ILType)
+                        if (t is ILType)
                         {
-                            CLR.TypeSystem.ILType type = (CLR.TypeSystem.ILType)t;
+                            ILType type = (ILType)t;
                             return type.StaticInstance[esp->ValueLow];
                         }
                         else
                         {
-                            CLR.TypeSystem.CLRType type = (CLR.TypeSystem.CLRType)t;
+                            CLRType type = (CLRType)t;
                             return type.GetFieldValue(esp->ValueLow, null);
                         }
                     }
@@ -176,6 +200,51 @@ namespace ILRuntime.Runtime.Stack
                 *esp = Null;
             }
         }
+
+        public static unsafe StackObject* PushDateTime(StackObject* esp, List<object> mStack, DateTime obj, bool isBox = false)
+        {
+            esp->ObjectType = ObjectTypes.DateTime;
+            esp->ValueDateTime = obj;
+            return esp + 1;
+        }
+
+        public static unsafe StackObject* PushObject(StackObject* esp, List<object> mStack, object obj, bool isBox = false)
+        {
+            if (obj != null)
+            {
+                if (!isBox)
+                {
+                    var typeFlags = obj.GetType().GetTypeFlags();
+
+                    if ((typeFlags & CLR.Utils.Extensions.TypeFlags.IsPrimitive) != 0)
+                    {
+                        ILIntepreter.UnboxObject(esp, obj);
+                    }
+                    else if ((typeFlags & CLR.Utils.Extensions.TypeFlags.IsEnum) != 0)
+                    {
+                        esp->ObjectType = ObjectTypes.Integer;
+                        esp->Value = Convert.ToInt32(obj);
+                    }
+                    else
+                    {
+                        esp->ObjectType = ObjectTypes.Object;
+                        esp->Value = mStack.Count;
+                        mStack.Add(obj);
+                    }
+                }
+                else
+                {
+                    esp->ObjectType = ObjectTypes.Object;
+                    esp->Value = mStack.Count;
+                    mStack.Add(obj);
+                }
+            }
+            else
+            {
+                return ILIntepreter.PushNull(esp);
+            }
+            return esp + 1;
+        }
     }
 
     public enum ObjectTypes
@@ -187,6 +256,7 @@ namespace ILRuntime.Runtime.Stack
         Double,
         StackObjectReference,//Value = pointer, 
         StaticFieldReference,
+        DateTime,
         Object,
         FieldReference,//Value = objIdx, ValueLow = fieldIdx
         ArrayReference,//Value = objIdx, ValueLow = elemIdx

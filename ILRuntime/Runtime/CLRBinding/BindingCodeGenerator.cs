@@ -193,7 +193,7 @@ namespace ILRuntime.Runtime.Generated
                 sb2.Append("}");
                 sb.AppendLine(string.Format("            args = new Type[]{0};", sb2));
                 sb.AppendLine(string.Format("            method = type.GetMethod(\"{0}\", flag, null, args, null);", i.Name));
-                sb.AppendLine(string.Format("            app.RegisterCLRMethodRedirection(method, {0}_{1});", i.Name, idx));
+                sb.AppendLine(string.Format("            if (method != null) app.RegisterCLRMethodRedirection(method, {0}_{1}); else UnityEngine.Debug.LogWarning(\"warning missing method {0}\"); ", i.Name, idx));
 
                 idx++;
             }
@@ -214,10 +214,10 @@ namespace ILRuntime.Runtime.Generated
                     continue;
 
                 sb.AppendLine(string.Format("            field = type.GetField(\"{0}\", flag);", i.Name));
-                sb.AppendLine(string.Format("            app.RegisterCLRFieldGetter(field, get_{0}_{1});", i.Name, idx));
+                sb.AppendLine(string.Format("            if (field != null) app.RegisterCLRFieldGetter(field, get_{0}_{1}); else UnityEngine.Debug.LogWarning(\"warning missing field {0}\");", i.Name, idx));
                 if (!i.IsInitOnly && !i.IsLiteral)
                 {
-                    sb.AppendLine(string.Format("            app.RegisterCLRFieldSetter(field, set_{0}_{1});", i.Name, idx));
+                    sb.AppendLine(string.Format("            if (field != null) app.RegisterCLRFieldSetter(field, set_{0}_{1});", i.Name, idx));
                 }
 
                 idx++;
