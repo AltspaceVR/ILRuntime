@@ -24,13 +24,13 @@ namespace ILRuntime.Runtime.Generated
             Type type = typeof(System.ValueType);
             args = new Type[]{typeof(System.Object)};
             method = type.GetMethod("Equals", flag, null, args, null);
-            if (method != null) app.RegisterCLRMethodRedirection(method, Equals_0); else UnityEngine.Debug.LogWarning("warning missing method Equals"); 
+            if (method != null) app.RegisterCLRMethodRedirection(method, Equals_0); 
             args = new Type[]{};
             method = type.GetMethod("GetHashCode", flag, null, args, null);
-            if (method != null) app.RegisterCLRMethodRedirection(method, GetHashCode_1); else UnityEngine.Debug.LogWarning("warning missing method GetHashCode"); 
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetHashCode_1); 
             args = new Type[]{};
             method = type.GetMethod("ToString", flag, null, args, null);
-            if (method != null) app.RegisterCLRMethodRedirection(method, ToString_2); else UnityEngine.Debug.LogWarning("warning missing method ToString"); 
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToString_2); 
 
 
             app.RegisterCLRCreateArrayInstance(type, s => new System.ValueType[s]);

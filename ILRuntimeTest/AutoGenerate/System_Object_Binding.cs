@@ -24,22 +24,22 @@ namespace ILRuntime.Runtime.Generated
             Type type = typeof(System.Object);
             args = new Type[]{};
             method = type.GetMethod("ToString", flag, null, args, null);
-            if (method != null) app.RegisterCLRMethodRedirection(method, ToString_0); else UnityEngine.Debug.LogWarning("warning missing method ToString"); 
+            if (method != null) app.RegisterCLRMethodRedirection(method, ToString_0); 
             args = new Type[]{typeof(System.Object)};
             method = type.GetMethod("Equals", flag, null, args, null);
-            if (method != null) app.RegisterCLRMethodRedirection(method, Equals_1); else UnityEngine.Debug.LogWarning("warning missing method Equals"); 
+            if (method != null) app.RegisterCLRMethodRedirection(method, Equals_1); 
             args = new Type[]{typeof(System.Object), typeof(System.Object)};
             method = type.GetMethod("Equals", flag, null, args, null);
-            if (method != null) app.RegisterCLRMethodRedirection(method, Equals_2); else UnityEngine.Debug.LogWarning("warning missing method Equals"); 
+            if (method != null) app.RegisterCLRMethodRedirection(method, Equals_2); 
             args = new Type[]{typeof(System.Object), typeof(System.Object)};
             method = type.GetMethod("ReferenceEquals", flag, null, args, null);
-            if (method != null) app.RegisterCLRMethodRedirection(method, ReferenceEquals_3); else UnityEngine.Debug.LogWarning("warning missing method ReferenceEquals"); 
+            if (method != null) app.RegisterCLRMethodRedirection(method, ReferenceEquals_3); 
             args = new Type[]{};
             method = type.GetMethod("GetHashCode", flag, null, args, null);
-            if (method != null) app.RegisterCLRMethodRedirection(method, GetHashCode_4); else UnityEngine.Debug.LogWarning("warning missing method GetHashCode"); 
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetHashCode_4); 
             args = new Type[]{};
             method = type.GetMethod("GetType", flag, null, args, null);
-            if (method != null) app.RegisterCLRMethodRedirection(method, GetType_5); else UnityEngine.Debug.LogWarning("warning missing method GetType"); 
+            if (method != null) app.RegisterCLRMethodRedirection(method, GetType_5); 
 
 
             app.RegisterCLRCreateDefaultInstance(type, () => new System.Object());

@@ -24,22 +24,22 @@ namespace ILRuntime.Runtime.Generated
             Type type = typeof(ILRuntimeTest.TestFramework.TestStruct);
             args = new Type[]{typeof(ILRuntimeTest.TestFramework.TestStruct).MakeByRefType()};
             method = type.GetMethod("DoTest", flag, null, args, null);
-            if (method != null) app.RegisterCLRMethodRedirection(method, DoTest_0); else UnityEngine.Debug.LogWarning("warning missing method DoTest"); 
+            if (method != null) app.RegisterCLRMethodRedirection(method, DoTest_0); 
             args = new Type[]{typeof(System.Int32).MakeByRefType()};
             method = type.GetMethod("DoTest", flag, null, args, null);
-            if (method != null) app.RegisterCLRMethodRedirection(method, DoTest_1); else UnityEngine.Debug.LogWarning("warning missing method DoTest"); 
+            if (method != null) app.RegisterCLRMethodRedirection(method, DoTest_1); 
             args = new Type[]{typeof(ILRuntimeTest.TestFramework.TestStruct)};
             method = type.GetMethod("DoTest2", flag, null, args, null);
-            if (method != null) app.RegisterCLRMethodRedirection(method, DoTest2_2); else UnityEngine.Debug.LogWarning("warning missing method DoTest2"); 
+            if (method != null) app.RegisterCLRMethodRedirection(method, DoTest2_2); 
             args = new Type[]{typeof(System.Int32), typeof(System.Int32)};
             method = type.GetMethod("Add", flag, null, args, null);
-            if (method != null) app.RegisterCLRMethodRedirection(method, Add_3); else UnityEngine.Debug.LogWarning("warning missing method Add"); 
+            if (method != null) app.RegisterCLRMethodRedirection(method, Add_3); 
 
             field = type.GetField("value", flag);
-            if (field != null) app.RegisterCLRFieldGetter(field, get_value_0); else UnityEngine.Debug.LogWarning("warning missing field value");
+            if (field != null) app.RegisterCLRFieldGetter(field, get_value_0); 
             if (field != null) app.RegisterCLRFieldSetter(field, set_value_0);
             field = type.GetField("instance", flag);
-            if (field != null) app.RegisterCLRFieldGetter(field, get_instance_1); else UnityEngine.Debug.LogWarning("warning missing field instance");
+            if (field != null) app.RegisterCLRFieldGetter(field, get_instance_1); 
             if (field != null) app.RegisterCLRFieldSetter(field, set_instance_1);
 
             app.RegisterCLRMemberwiseClone(type, PerformMemberwiseClone);
