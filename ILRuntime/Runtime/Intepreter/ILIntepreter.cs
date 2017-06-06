@@ -1642,10 +1642,21 @@ namespace ILRuntime.Runtime.Intepreter
                                         ExceptionHandler eh = null;
 
                                         int addr = ip->TokenInteger;
-                                        var sql = from e in method.ExceptionHandler
-                                                  where addr == e.HandlerEnd + 1 && e.HandlerType == ExceptionHandlerType.Finally || e.HandlerType == ExceptionHandlerType.Fault
-                                                  select e;
-                                        eh = sql.FirstOrDefault();
+                                        var l = method.ExceptionHandler.Length;
+
+                                        for (var iEx = 0; iEx < l; iEx++)
+                                        {
+                                            var e = method.ExceptionHandler[iEx];
+
+                                            if (addr == e.HandlerEnd + 1 &&
+                                                e.HandlerType == ExceptionHandlerType.Finally ||
+                                                e.HandlerType == ExceptionHandlerType.Fault)
+                                            {
+                                                eh = e;
+                                                break;
+                                            } 
+                                        }
+
                                         if (eh != null)
                                         {
                                             finallyEndAddress = ip->TokenInteger;

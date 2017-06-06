@@ -6,20 +6,12 @@ using System.Text;
 
 using ILRuntime.CLR.TypeSystem;
 using ILRuntime.CLR.Utils;
-using ILRuntime.Runtime.Enviorment;
 using ILRuntime.Runtime.Intepreter;
 using UnityEngine;
 using AppDomain = ILRuntime.Runtime.Enviorment.AppDomain;
 
 namespace ILRuntime.Runtime.Stack
 {
-    [StructLayout(LayoutKind.Explicit)]
-    public struct StackValueObject
-    {
-        [FieldOffset(0)] public Vector3 ValueVector3;
-        [FieldOffset(0)] public Quaternion ValueQuaternion;
-    }
-
     [StructLayout(LayoutKind.Explicit)]
     public unsafe struct StackObject
     {
@@ -32,114 +24,15 @@ namespace ILRuntime.Runtime.Stack
         [FieldOffset(8)] public int ValueLow;
         [FieldOffset(12)] public void* ValuePtr;
 
+        public static IStackObjectHandler Handler = new BaseStackObjectHandler();
+
         public static bool IsCustomValueType(ObjectTypes objectType)
         {
             var i = (int) objectType;
             return i >= 128 && i <= 1023;
         }
 
-        public static unsafe void PointToNewValueTypeValue(StackObject *loc, ILIntepreter interpreter, IList<object> mStack, CLRType t)
-        {
-            if (t.TypeForCLR == typeof (Vector3))
-            {
-                loc->ObjectType = (ObjectTypes)128;
-                interpreter.ResetValuePtr(loc);
-                ((StackValueObject *)loc->ValuePtr)->ValueVector3 = default(Vector3);
-                mStack.Add(null);
-            }
-            else if (t.TypeForCLR == typeof (Quaternion))
-            {
-                loc->ObjectType = (ObjectTypes)129;
-                interpreter.ResetValuePtr(loc);
-                ((StackValueObject *)loc->ValuePtr)->ValueQuaternion = default(Quaternion);
-                mStack.Add(null);
-            }
-            else
-            {
-                loc->ObjectType = ObjectTypes.Object;
-                loc->Value = mStack.Count;
-                mStack.Add(t.CreateDefaultInstance());
-            }
-
-        }
-
-        //IL2CPP can't process esp->ToObject() properly, so I can only use static function for this
-        public static unsafe object ToObject(StackObject* esp, AppDomain appdomain, IList<object> mStack)
-        {
-            switch (esp->ObjectType)
-            {
-                case ObjectTypes.Integer:
-                    return esp->Value;
-                case ObjectTypes.Long:
-                    {
-                        return esp->ValueLong;
-                    }
-                case ObjectTypes.Float:
-                    {
-                        return esp->ValueFloat;
-                    }
-                case ObjectTypes.Double:
-                    {
-                        return esp->ValueDouble;
-                    }
-                case (ObjectTypes)128:
-                    return ((StackValueObject *)esp)->ValueVector3;
-                case (ObjectTypes)129:
-                    return ((StackValueObject *)esp)->ValueQuaternion;
-                case ObjectTypes.Object:
-                    return mStack[esp->Value];
-                case ObjectTypes.FieldReference:
-                    {
-                        ILTypeInstance instance = mStack[esp->Value] as ILTypeInstance;
-                        if (instance != null)
-                        {
-                            return instance[esp->ValueLow];
-                        }
-                        else
-                        {
-                            var obj = mStack[esp->Value];
-                            IType t = null;
-                            if (obj is CrossBindingAdaptorType)
-                            {
-                                t = appdomain.GetType(((CrossBindingAdaptor)((CrossBindingAdaptorType)obj).ILInstance.Type.FirstCLRBaseType).BaseCLRType);
-                            }
-                            else
-                                t = appdomain.GetType(obj.GetType());
-
-                            return ((CLRType)t).GetFieldValue(esp->ValueLow, obj);
-                        }
-                    }
-                case ObjectTypes.ArrayReference:
-                    {
-                        Array instance = mStack[esp->Value] as Array;
-                        return instance.GetValue(esp->ValueLow);
-                    }
-                case ObjectTypes.StaticFieldReference:
-                    {
-                        var t = appdomain.GetType(esp->Value);
-                        if (t is ILType)
-                        {
-                            ILType type = (ILType)t;
-                            return type.StaticInstance[esp->ValueLow];
-                        }
-                        else
-                        {
-                            CLRType type = (CLRType)t;
-                            return type.GetFieldValue(esp->ValueLow, null);
-                        }
-                    }
-                case ObjectTypes.StackObjectReference:
-                    {
-                        return ToObject((*(StackObject**)&esp->Value), appdomain, mStack);
-                    }
-                case ObjectTypes.Null:
-                    return null;
-                default:
-                    throw new NotImplementedException();
-            }
-        }
-
-        public unsafe static void Initialized(ref StackObject esp, int idx, Type t, IType fieldType, IList<object> mStack)
+        public static void Initialized(ref StackObject esp, int idx, Type t, IType fieldType, IList<object> mStack)
         {
             if (t.IsPrimitive)
             {
@@ -191,7 +84,7 @@ namespace ILRuntime.Runtime.Stack
         }
 
         //IL2CPP can't process esp->Initialized() properly, so I can only use static function for this
-        public unsafe static void Initialized(StackObject* esp, Type t)
+        public static void Initialized(StackObject* esp, Type t)
         {
             if (t.IsPrimitive)
             {
@@ -228,70 +121,14 @@ namespace ILRuntime.Runtime.Stack
             }
         }
 
-        public static unsafe StackObject* PushVector3(StackObject* esp, ILIntepreter intepreter, Vector3 obj)
+        public static StackObject* PushFloat(StackObject* esp, float obj)
         {
-            esp->ObjectType = (ObjectTypes)128;
-            intepreter.ResetValuePtr(esp);
-            ((StackValueObject *)esp->ValuePtr)->ValueVector3 = obj;
+            esp->ObjectType = ObjectTypes.Float;
+            esp->ValueFloat = obj;
             return esp + 1;
         }
 
-        public static unsafe StackObject* PushQuaternion(StackObject* esp, ILIntepreter intepreter, Quaternion obj)
-        {
-            esp->ObjectType = (ObjectTypes)129;
-            intepreter.ResetValuePtr(esp);
-            ((StackValueObject *)esp->ValuePtr)->ValueQuaternion = obj;
-            return esp + 1;
-        }
-
-        public static unsafe void PushCustomValueTypeFromField(AppDomain appDomain, StackObject* stackObject, StackObject* objRef, IList<object> mStack, int token)
-        {
-            switch (objRef->ObjectType)
-            {
-                case (ObjectTypes)128:
-                    var _o_128 = ((StackValueObject *)objRef->ValuePtr)->ValueVector3;
-                    PushObject(stackObject, mStack, ((CLRType) appDomain.GetType(typeof(Vector3))).GetFieldValue(token, _o_128));
-                    break;
-                case (ObjectTypes)129:
-                    var _o_129 = ((StackValueObject *)objRef->ValuePtr)->ValueQuaternion;
-                    PushObject(stackObject, mStack, ((CLRType) appDomain.GetType(typeof(Vector3))).GetFieldValue(token, _o_129));
-                    break;
-            }
-        }
-
-        public static unsafe void PushCustomValueTypeToArray(Array arr, StackObject* val, int index)
-        {
-            if (arr is object[])
-            {
-                switch (val->ObjectType)
-                {
-                    case (ObjectTypes)128:
-                        var _o_128 = ((StackValueObject *)val->ValuePtr)->ValueVector3;
-                        arr.SetValue(_o_128, index);
-                        break;
-                    case (ObjectTypes)129:
-                        var _o_129 = ((StackValueObject *)val->ValuePtr)->ValueQuaternion;
-                        arr.SetValue(_o_129, index);
-                        break;
-                }
-            }
-            else
-            {
-                switch (val->ObjectType)
-                {
-                    case (ObjectTypes)128:
-                        var _o_128 = ((StackValueObject *)val->ValuePtr)->ValueVector3;
-                        ((Vector3[])arr)[index] = _o_128;
-                        break;
-                    case (ObjectTypes)129:
-                        var _o_129 = ((StackValueObject *)val->ValuePtr)->ValueQuaternion;
-                        ((Quaternion[])arr)[index] = _o_129;
-                        break;
-                }
-            }
-        }
-
-        public static unsafe StackObject* PushObject(StackObject* esp, IList<object> mStack, object obj, bool isBox = false)
+        public static StackObject* PushObject(StackObject* esp, IList<object> mStack, object obj, bool isBox = false)
         {
             if (obj != null)
             {
@@ -328,6 +165,27 @@ namespace ILRuntime.Runtime.Stack
             }
             return esp + 1;
         }
+
+        public static void PointToNewValueTypeValue(StackObject *loc, ILIntepreter interpreter, IList<object> mStack, CLRType t)
+        {
+            Handler.PointToNewValueTypeValue(loc, interpreter, mStack, t);
+        }
+
+        public static object ToObject(StackObject* esp, AppDomain appdomain, IList<object> mStack)
+        {
+            return Handler.ToObject(esp, appdomain, mStack);
+        }
+
+        public static void PushCustomValueTypeFromField(AppDomain appDomain, StackObject* stackObject, StackObject* objRef, IList<object> mStack, int token)
+        {
+            Handler.PushCustomValueTypeFromField(appDomain, stackObject, objRef, mStack, token);
+        }
+
+        public static void PushCustomValueTypeToArray(Array arr, StackObject* val, int index)
+        {
+            Handler.PushCustomValueTypeToArray(arr, val, index);
+        }
+
     }
 
     public enum ObjectTypes

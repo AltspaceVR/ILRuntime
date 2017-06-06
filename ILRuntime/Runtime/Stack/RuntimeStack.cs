@@ -35,7 +35,7 @@ namespace ILRuntime.Runtime.Stack
         {
             this.intepreter = intepreter;
 
-            stackValueMemorySlotSize = sizeof (StackValueObject);
+            stackValueMemorySlotSize = StackObject.Handler.SizeOfStackObjectValue;
             stackMemoryBasePointer = System.Runtime.InteropServices.Marshal.AllocHGlobal(sizeof(StackObject) * MAXIMAL_STACK_OBJECTS);
             stackValueMemoryBasePointer = System.Runtime.InteropServices.Marshal.AllocHGlobal(stackValueMemorySlotSize * MAXIMAL_STACK_OBJECTS);
 
