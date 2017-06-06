@@ -288,7 +288,8 @@ namespace ILRuntime.Other
         // Clears the contents of UncheckedList.
         public void Clear()
         {
-            if (!typeof(T).IsValueType)
+            // slower in Unity to check if value type, so just always do it
+            if (true /*!typeof(T).IsValueType*/)
             {
                 int size = _size;
                 _size = 0;
@@ -755,7 +756,8 @@ namespace ILRuntime.Other
                 }
             }
 
-            if (!typeof(T).IsValueType)
+            // slower in Unity to check if value type, so just always do it
+            if (true /*!typeof(T).IsValueType*/)
             {
                 Array.Clear(_items, freeIndex, _size - freeIndex); // Clear the elements so that the gc can reclaim the references.
             }
@@ -776,7 +778,8 @@ namespace ILRuntime.Other
             {
                 Array.Copy(_items, index + 1, _items, index, _size - index);
             }
-            if (!typeof(T).IsValueType)
+            // slower in Unity to check if value type, so just always do it
+            if (true/*!typeof(T).IsValueType*/)
             {
                 _items[_size] = default(T);
             }
@@ -797,7 +800,8 @@ namespace ILRuntime.Other
                 }
 
                 _version++;
-                if (!typeof(T).IsValueType)
+                // slower in Unity to check if value type, so just always do it
+                if (true /*!typeof(T).IsValueType*/)
                 {
                     Array.Clear(_items, _size, count);
                 }

@@ -224,7 +224,7 @@ namespace ILRuntime.CLR.Method
         {
             get
             {
-                if (def.HasParameters && parameters == null)
+                if (parameters == null && def.HasParameters)
                 {
                     InitParameters();
                 }
